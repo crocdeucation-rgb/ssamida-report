@@ -158,3 +158,41 @@ body = f"""<header class="hd"><div class="in"><div class="kick">쌤이다 총괄
 </main>"""
 open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(page("쌤이다 총괄보고", body, P))
 print("built:", len(days), "day(s),", len(open_todos), "open todos")
+
+# ---------- 산출물 HTML 모바일 보정 (갤럭시 폴드 커버/메인 화면) ----------
+MOBILE_TAG = "<!--ssr-mobile-->"
+GENERIC = """<style>@media(max-width:900px){html{-webkit-text-size-adjust:100%}
+img,video,svg{max-width:100%;height:auto}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+pre,code{white-space:pre-wrap;word-break:break-all}}</style>"""
+DECK = """<style>
+/* 좁은 세로 화면(폴드 커버·폰): 슬라이드를 세로 문서로 펼침 */
+@media (max-width:900px) and (orientation:portrait){
+html,body{height:auto!important;overflow:auto!important;display:block!important;-webkit-text-size-adjust:100%}
+#canvas{transform:none!important;width:100%!important;height:auto!important}
+.s{position:relative!important;display:flex!important;inset:auto;padding:34px 18px 30px!important;border-bottom:1px solid #22282c;min-height:0}
+h1{font-size:34px!important;letter-spacing:-1.2px!important}
+h2{font-size:24px!important;letter-spacing:-.8px!important;margin-bottom:16px!important}
+h3{font-size:17px!important}
+p{font-size:15.5px!important}.sub{font-size:13.5px!important}
+li{font-size:15px!important;margin-bottom:10px!important}li:before{top:9px!important}
+.kick{font-size:11px!important;margin-bottom:12px!important}
+table{display:table!important;width:100%!important;font-size:13px!important}th,td{padding:7px 8px!important;font-size:13px!important;width:auto!important}
+table[style*="font-size:15px"]{display:block!important;overflow-x:auto}table[style*="font-size:15px"] th,table[style*="font-size:15px"] td{min-width:82px}
+td.c,th.c{white-space:normal!important}
+.two{grid-template-columns:1fr!important;gap:12px!important}
+.card{padding:16px!important}.card p{font-size:14.5px!important}
+.big{font-size:46px!important;letter-spacing:-2px!important}
+.bar .l{width:96px!important;font-size:13px!important}.bar{font-size:13px!important}
+.sb{grid-template-columns:repeat(2,1fr)!important;gap:12px!important}
+.sb>div{min-width:0}.fr{width:100%!important;height:auto!important;aspect-ratio:1/1}.fl{width:auto!important}
+.s>div[style*="display:flex"]{flex-direction:column!important;gap:20px!important}
+.wf{zoom:.76}
+.nav,#hud,#tip,#bar{display:none!important}
+}</style>"""
+for f in glob.glob(os.path.join(ROOT, "files", "*", "*.html")):
+    t = open(f, encoding="utf-8").read()
+    if MOBILE_TAG in t: continue
+    css = GENERIC + (DECK if 'id="canvas"' in t else "")
+    t = t.replace("</head>", MOBILE_TAG + css + "</head>", 1)
+    open(f, "w", encoding="utf-8").write(t)

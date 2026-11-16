@@ -4,7 +4,8 @@
 - `reports/YYYY-MM-DD.html` — 그날 3명 합본 보고
 - `data/YYYY-MM-DD.json` — 원본 데이터 (보고 1일 = 파일 1개)
 - `files/YYYY-MM-DD/` — 산출물 원본. HTML 속 이미지는 `img/`로 분리해 둠
-- `files/YYYY-MM-DD/originals/` — 각자 제출한 워드 원본
+- `files/YYYY-MM-DD/originals/` — 각자 제출한 워드 원본 (지원자 실명이 든 원본은 올리지 않음)
+- 모바일: 갤럭시 폴드 커버(344~412px)·메인(884px) 화면 기준 점검. build.py가 산출물 HTML에 모바일 보정 CSS를 자동 삽입
 
 ## 매일 흐름
 1. 신상준 · 김상현 · 신우성 → 일일업무보고(워드 양식 등) 제출

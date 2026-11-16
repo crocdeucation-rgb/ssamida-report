@@ -1,6 +1,7 @@
 :root{--ink:#0f172a;--sub:#334155;--mut:#64748b;--line:#e2e8f0;--bg:#f6f7f9;--card:#fff;
 --lime:#c7f23a;--navy:#0b1220;--red:#dc2626;--redbg:#fef2f2;--amb:#b45309;--ambbg:#fffbeb;--blu:#1d4ed8;--blubg:#eff6ff;--grn:#15803d;--grnbg:#f0fdf4}
 *{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);
 -webkit-font-smoothing:antialiased;line-height:1.6;word-break:keep-all;font-size:15px}
 a{color:inherit;text-decoration:none}
@@ -97,6 +98,9 @@ main{padding-top:10px;padding-bottom:60px}
 .outs li:last-child{border-bottom:0}
 .outs span{font-size:12.5px;color:var(--mut)}
 .ft{text-align:center;color:#94a3b8;font-size:12px;padding:26px 0 34px}
-@media(max-width:900px){.boards,.cols,.cols2,.issues.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.cols,.cols2{grid-template-columns:1fr}.boards,.issues.grid{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}
+.pnav{position:sticky;top:0}}
+@media(max-width:620px){.boards,.issues.grid{grid-template-columns:1fr}}
+.hd .pnav{z-index:5}
 @media(max-width:560px){.hd h1{font-size:26px}.person{padding:20px 16px}.ph{flex-direction:column}.in{padding:0 14px}}
 @media print{.hd{background:#fff;color:#000}.kpi{background:#fff;border-color:#ccc}.pnav,.back,.files{display:none}.person{break-inside:avoid-page}}
