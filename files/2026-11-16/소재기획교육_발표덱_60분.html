@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소재 기획 교육 — 발표 덱 (60분)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0b0d0e}
+body{
+  font-family:Pretendard,'Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕','Noto Sans KR','Nanum Gothic',system-ui,sans-serif;
+  color:#f1f3f4;-webkit-font-smoothing:antialiased;
+  display:grid;place-items:center;
+}
+#canvas{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center}
+
+/* ---- slide shell ---- */
+.s{position:absolute;inset:0;padding:62px 86px;display:none;flex-direction:column;justify-content:center;overflow:hidden}
+.s.on{display:flex}
+.s.top{justify-content:flex-start}
+
+/* ---- type scale (px, fixed canvas) ---- */
+.kick{font-size:13px;font-weight:700;letter-spacing:2.6px;color:#00cfb2;margin-bottom:20px;text-transform:uppercase}
+h1{font-size:62px;font-weight:800;letter-spacing:-2.4px;line-height:1.12;word-break:keep-all}
+h2{font-size:40px;font-weight:800;letter-spacing:-1.5px;line-height:1.2;margin-bottom:26px;word-break:keep-all}
+h3{font-size:21px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px;color:#fff}
+p{font-size:21px;line-height:1.6;color:#c5cacd;word-break:keep-all;max-width:1000px}
+p+p{margin-top:14px}
+.sub{font-size:16px;line-height:1.65;color:#848c91;margin-top:24px;max-width:1000px}
+b,strong{color:#fff;font-weight:700}
+.tl{color:#00cfb2}.rd{color:#ff8080}.yl{color:#ffcf6b}
+.mono{font-family:Consolas,'SF Mono',Menlo,monospace}
+
+ul{list-style:none;margin-top:6px}
+li{font-size:20px;line-height:1.5;color:#c5cacd;padding-left:22px;position:relative;margin-bottom:15px;word-break:keep-all;max-width:1000px}
+li:last-child{margin-bottom:0}
+li:before{content:'';position:absolute;left:0;top:12px;width:7px;height:7px;background:#00cfb2;border-radius:50%}
+li.x:before{background:#ff8080}
+
+table{border-collapse:collapse;width:100%;font-size:17px}
+th,td{border:1px solid #272c30;padding:10px 13px;text-align:left;vertical-align:middle;word-break:keep-all;line-height:1.45}
+th{background:#15181a;color:#fff;font-weight:700;font-size:15px}
+td{color:#c5cacd}
+td.c,th.c{text-align:center;white-space:nowrap}
+td.ok{color:#00cfb2;font-weight:700}
+td.no{color:#ff8080;font-weight:700}
+td.mid{color:#ffcf6b;font-weight:700}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{background:#131618;border:1px solid #242a2d;border-radius:9px;padding:22px 24px}
+.card.k{border-left:4px solid #00cfb2}
+.card.r{border-left:4px solid #ff8080}
+.card p{font-size:17px;line-height:1.55;margin:0}
+.card p+p{margin-top:9px}
+
+.big{font-size:104px;font-weight:800;letter-spacing:-5px;line-height:1}
+.bars{margin-top:4px}
+.bar{display:flex;align-items:center;gap:12px;margin-bottom:11px;font-size:16px}
+.bar:last-child{margin-bottom:0}
+.bar .l{width:150px;flex:none;color:#c5cacd}
+.bar .t{flex:1;background:#202528;height:11px;border-radius:2px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:#00cfb2}
+.bar .t i.dim{background:#3a4146}
+.bar .v{width:28px;text-align:right;font-family:Consolas,Menlo,monospace;color:#fff}
+.colh{font-size:15px;font-weight:700;color:#00cfb2;letter-spacing:.5px;margin-bottom:14px}
+
+
+/* ---- storyboard frames ---- */
+.sb{display:grid;grid-template-columns:repeat(4,196px);gap:14px 18px;justify-content:start}
+.fr{position:relative;width:196px;height:196px;background:#1c2124;border:1px solid #2e3539;border-radius:4px;overflow:hidden}
+.fr .sz{position:absolute;left:0;right:0;height:15%;background:repeating-linear-gradient(45deg,rgba(255,128,128,.10) 0 6px,transparent 6px 12px)}
+.fr .sz.t{top:0;border-bottom:1px dashed rgba(255,128,128,.45)}
+.fr .sz.b{bottom:0;border-top:1px dashed rgba(255,128,128,.45)}
+.fr .sc{position:absolute;left:8px;right:8px;top:19%;font-size:11.5px;color:#7d878d;text-align:center;line-height:1.35}
+.fr .cp{position:absolute;left:10px;right:10px;top:46%;font-size:16px;font-weight:800;color:#fff;text-align:center;line-height:1.3;letter-spacing:-.3px;
+        text-shadow:0 0 3px #000,0 0 3px #000,0 0 3px #000}
+.fr .cp.cta{background:#00cfb2;color:#06110f;text-shadow:none;border-radius:4px;padding:6px 4px;top:52%}
+.fr .tm{position:absolute;left:6px;bottom:4px;font-family:Consolas,Menlo,monospace;font-size:10.5px;color:#ff9b9b}
+.fr .sp{position:absolute;right:6px;bottom:4px;font-family:Consolas,Menlo,monospace;font-size:10.5px;color:#ffcf6b}
+.fl{font-size:12.5px;color:#9aa3a8;margin-top:5px;width:196px;line-height:1.35}
+.anno{font-size:15px;color:#c5cacd;line-height:1.5}
+.anno b{color:#fff}
+.wf{position:relative;width:400px;height:400px;background:#eceeec;border-radius:4px;overflow:hidden;flex:none}
+.wf .z{position:absolute;left:28px;right:28px;border:1.5px dashed #9aa1a6;border-radius:3px;display:flex;align-items:center;justify-content:center;text-align:center;color:#3a4146;font-weight:700}
+.wf .tag{position:absolute;right:-1px;top:-1px;background:#3a4146;color:#fff;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:0 3px 0 3px}
+
+/* ---- chrome ---- */
+#hud{position:fixed;bottom:16px;right:22px;font-family:Consolas,Menlo,monospace;font-size:12px;color:#565e64;z-index:9}
+#tip{position:fixed;bottom:16px;left:22px;font-family:Consolas,Menlo,monospace;font-size:12px;color:#3a4146;z-index:9}
+#bar{position:fixed;left:0;bottom:0;height:3px;background:#00cfb2;z-index:9;transition:width .16s}
+.nav{position:fixed;inset:0;display:flex;z-index:5}
+.nav div{flex:1;cursor:pointer}
+
+@media print{
+  html,body{overflow:visible;height:auto;background:#fff;display:block}
+  #canvas{transform:none!important;width:100%;height:auto}
+  .s{position:static;display:flex!important;height:190mm;padding:12mm;page-break-after:always;border-bottom:1px solid #ccc}
+  body,p,li,td,.sub{color:#1b1b1b}
+  h1,h2,h3,b,strong{color:#000}
+  th{background:#eee;color:#000}
+  th,td{border-color:#ccc}
+  .card{background:#f7f8f8;border-color:#ddd}
+  .kick,.tl{color:#00806e}
+  #hud,#tip,#bar,.nav{display:none}
+  @page{size:A4 landscape;margin:8mm}
+}
+</style>
+</head>
+<body>
+
+<div id="canvas">
+
+<!-- 01 -->
+<section class="s">
+  <div class="kick">Araon Growth · Web Marketing Unit</div>
+  <h1>소재 기획,<br>감이 아니라 절차다</h1>
+  <p class="sub">김상현 · 김윤호 · 장윤호 · 우혜림 &nbsp;|&nbsp; 60분 &nbsp;|&nbsp; 2026-11-16</p>
+</section>
+
+<!-- 02 -->
+<section class="s">
+  <div class="kick">오늘 목표</div>
+  <h2>60분 뒤, 손에 <span class="tl">구성표 1장</span>이 남는다</h2>
+  <p>릴스 완성은 오늘 하지 않는다. 편집은 한 시간이면 배우는 기술이고, <b>무엇을 만들지 정하는 절차</b>가 어렵다.</p>
+  <p>오늘은 그 절차를 한 바퀴 돌린다. 구성표가 손에 있으면 편집은 30분이면 끝난다.</p>
+  <p class="sub">설명 25분 · 구성표 작성 12분 · 캡컷 시연 13분 · 정리 10분 &nbsp;|&nbsp; 제작은 숙제</p>
+</section>
+
+<!-- 03 -->
+<section class="s">
+  <div class="kick">01 / 전체 그림</div>
+  <h2>소재 기획은 4단계다</h2>
+  <table>
+    <tr><th class="c" style="width:106px">단계</th><th style="width:330px">하는 일</th><th>산출물</th></tr>
+    <tr><td class="c"><b>① 수집</b></td><td>경쟁사 활성 소재를 모은다</td><td>소재 목록 · 게재일 · 수집일</td></tr>
+    <tr><td class="c"><b>② 분류</b></td><td>3개 축으로 태깅하고 빈도를 센다</td><td>빈도표 — 지금 뭐가 많은지</td></tr>
+    <tr><td class="c ok">③ 가용성</td><td><b>우리가 쓸 수 있나</b>를 판정한다</td><td>가능 / 교집합 / 불가능</td></tr>
+    <tr><td class="c ok">④ 설계</td><td>교집합 칸을 우리 말로 채운다</td><td>구성표 → 소재</td></tr>
+  </table>
+  <p class="sub">①②는 성실하면 누구나 한다. <b>③은 브랜드를 알아야 하는 판단</b>이고, 건너뛰면 우리에게 없는 오퍼를 전제로 카피를 쓰게 된다. 그 소재는 집행 직전에 전부 버린다.</p>
+</section>
+
+<!-- 04 -->
+<section class="s">
+  <div class="kick">02 / 수집</div>
+  <h2>수집 경로는 <span class="tl">두 개</span>다</h2>
+  <table>
+    <tr><th style="width:132px"></th><th style="width:430px">A. 내 피드에서 발견</th><th>B. 라이브러리 전수조사</th></tr>
+    <tr><td><b>출발점</b></td><td>우연 — 경쟁사 명단 없이도 시작</td><td>경쟁사 명단</td></tr>
+    <tr><td><b>환경</b></td><td class="ok">실제 배달 환경 (스크롤 중)</td><td>정지된 이미지</td></tr>
+    <tr><td><b>위너 신호</b></td><td class="ok">나한테 왔다 + 손가락이 멈췄다</td><td>게재일 길이 · 집행 개수</td></tr>
+    <tr><td><b>한계</b></td><td>빈도 파악 불가</td><td>3초 테스트가 안 된다</td></tr>
+  </table>
+  <p class="sub">라이브러리만 보면 3초를 못 재고, 피드만 보면 지형을 못 본다.<br>
+  <b class="tl">피드에서 멈췄다(1차) → 라이브러리에서 오래 돌고 있다(2차). 두 신호가 겹치는 소재가 정답이다.</b></p>
+</section>
+
+<!-- 05 -->
+<section class="s">
+  <div class="kick">02 / 수집 — A경로</div>
+  <h2>피드에서 멈추면 바로 이것부터</h2>
+  <ul>
+    <li><b>그 자리에서 캡처</b> — 릴스는 화면녹화. 나중에 찾으면 못 찾는다</li>
+    <li><b>"왜 멈췄는지" 한 줄 메모</b> — 하루 지나면 이유를 못 떠올린다. 이 한 줄이 분석의 전부다</li>
+    <li>광고주 이름 확인 → 라이브러리에서 검색해 게재일·집행 개수 확인</li>
+    <li>랜딩을 눌러 폼까지 들어가 본다 — 소재가 약속한 것과 랜딩이 맞는지</li>
+  </ul>
+  <p class="sub">소재는 좋은데 랜딩이 허술한 경쟁사가 많다. 거기가 우리 기회다.</p>
+</section>
+
+<!-- 06 -->
+<section class="s">
+  <div class="kick">02 / 수집 — A경로 · 지금 점검</div>
+  <h2>워밍업 10일째 — <span class="tl">피드에 교육 광고가 뜨는가</span></h2>
+  <p>메타는 나를 특정 관심층으로 분류해 광고를 배달한다. 그래서 내 피드의 교육 광고는 <b>타겟팅을 통과한 소재</b>다. 라이브러리에는 없는 정보다.</p>
+  <ul style="margin-top:22px">
+    <li><b>지금 인스타를 열고 1분 스크롤</b> — 교육 광고가 몇 개 뜨는지 센다</li>
+    <li>1분에 1개도 안 뜨면 — 경쟁사 6곳 팔로우가 빠졌는지, 교육 콘텐츠 체류가 부족한지 확인</li>
+    <li class="x"><b class="rd">교육 광고를 숨긴 적 있는가</b> — 한 번 누르면 학습이 망가져 배달이 끊긴다</li>
+  </ul>
+  <p class="sub">워밍업은 끝나는 게 아니라 유지하는 것이다. 피드 수집 경로는 계정 상태만큼만 작동한다.</p>
+</section>
+
+<!-- 07 -->
+<section class="s">
+  <div class="kick">02 / 수집 — B경로</div>
+  <h2>라이브러리에서 뭘 보는가</h2>
+  <div class="two">
+    <div class="card k"><h3>위너 신호 ①</h3><p><b>게재 시작일</b>이 두세 달 이상. 돈 쓰며 오래 돌리는 데는 이유가 있다</p></div>
+    <div class="card k"><h3>위너 신호 ②</h3><p><b>동일소재 집행 개수.</b> 같은 소재를 여러 광고로 돌리면 광고주가 확신을 가진 소재다</p></div>
+  </div>
+  <div class="two" style="margin-top:22px">
+    <div class="card r"><h3>이미지 메이킹형 — 제외</h3><p>랜딩 링크 없음·홈 연결. 브랜드 인지가 목적이라 <b class="rd">리드를 뽑는 문장이 아니다</b></p></div>
+    <div class="card k"><h3>DB 수집형 — 이것만</h3><p>신청 폼으로 바로 연결. <b class="tl">리드를 뽑기 위해 설계된 문장</b></p></div>
+  </div>
+  <p class="sub mono">facebook.com/ads/library → 국가 대한민국 → 모든 광고 → 활성 광고</p>
+</section>
+
+<!-- 08 -->
+<section class="s">
+  <div class="kick">02 / 수집 — B경로</div>
+  <h2>DB형에서 볼 것 — <span class="tl">무엇을 비워뒀나</span></h2>
+  <p>랜딩으로 넘기려면 소재 안에서 답을 다 주면 안 된다. 궁금증이 남아야 클릭이 난다.</p>
+  <ul style="margin-top:22px">
+    <li>결과만 보여주고 방법을 안 알려줌 — "9개월만에 49→93"</li>
+    <li>진단만 던지고 해석을 안 줌 — 체크리스트형</li>
+    <li>정보 일부만 공개 — "○○고 평가계획 바뀐 부분"</li>
+    <li>남의 사례를 보여주고 내 아이는 어떤지 궁금하게 만듦</li>
+  </ul>
+</section>
+
+<!-- 09 -->
+<section class="s">
+  <div class="kick">03 / 분류</div>
+  <h2>3개 축으로 태깅한다</h2>
+  <table>
+    <tr><td style="width:230px"><b>① 훅 유형</b></td><td>첫 문장이 어떻게 멈추게 하는가 — 11종</td></tr>
+    <tr><td><b>② 넛지 장치</b></td><td>무엇으로 신청을 밀어내는가 — 13종</td></tr>
+    <tr><td><b class="tl">③ 시즌 메시지</b></td><td>이 시기에 무슨 얘기를 하는가 — <b>수집일과 함께</b></td></tr>
+  </table>
+  <p class="sub">분류 체계를 매번 새로 만들면 비교가 안 된다. 고정 목록을 그대로 쓴다 — 전체 목록은 배포자료 2면.<br>
+  시즌은 날짜가 없으면 다음 달에 못 쓰는 데이터가 된다.</p>
+</section>
+
+<!-- 10 -->
+<section class="s">
+  <div class="kick">03 / 분류 — 빈도</div>
+  <h2>경쟁사가 많이 쓰는 것</h2>
+  <div class="two">
+    <div>
+      <div class="colh">훅 유형</div>
+      <div class="bars">
+        <div class="bar"><span class="l">질문형</span><span class="t"><i style="width:100%"></i></span><span class="v">20</span></div>
+        <div class="bar"><span class="l">페인 공감</span><span class="t"><i style="width:95%"></i></span><span class="v">19</span></div>
+        <div class="bar"><span class="l">결과 숫자</span><span class="t"><i style="width:80%"></i></span><span class="v">16</span></div>
+        <div class="bar"><span class="l">후기·증언</span><span class="t"><i style="width:75%"></i></span><span class="v">15</span></div>
+        <div class="bar"><span class="l">차별점 선언</span><span class="t"><i style="width:55%"></i></span><span class="v">11</span></div>
+        <div class="bar"><span class="l">시즌·마감</span><span class="t"><i style="width:50%"></i></span><span class="v">10</span></div>
+        <div class="bar"><span class="l">대조(학원 vs)</span><span class="t"><i style="width:45%"></i></span><span class="v">9</span></div>
+        <div class="bar"><span class="l">정보·반전</span><span class="t"><i class="dim" style="width:30%"></i></span><span class="v">6</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="colh">넛지 장치</div>
+      <div class="bars">
+        <div class="bar"><span class="l">무료 체험</span><span class="t"><i style="width:100%"></i></span><span class="v">35</span></div>
+        <div class="bar"><span class="l">권위(SKY·업력)</span><span class="t"><i style="width:74%"></i></span><span class="v">26</span></div>
+        <div class="bar"><span class="l">손실 회피</span><span class="t"><i style="width:57%"></i></span><span class="v">20</span></div>
+        <div class="bar"><span class="l">사회적 증거</span><span class="t"><i style="width:54%"></i></span><span class="v">19</span></div>
+        <div class="bar"><span class="l">구체적 숫자</span><span class="t"><i style="width:49%"></i></span><span class="v">17</span></div>
+        <div class="bar"><span class="l">위험 제거(환불)</span><span class="t"><i style="width:40%"></i></span><span class="v">14</span></div>
+        <div class="bar"><span class="l">자기진단 체크</span><span class="t"><i class="dim" style="width:20%"></i></span><span class="v">7</span></div>
+        <div class="bar"><span class="l">호기심 갭</span><span class="t"><i class="dim" style="width:14%"></i></span><span class="v">5</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="sub">1:1 과외 79종 기준 · 2026-11-16 수집 &nbsp;|&nbsp; <span class="tl">흐린 막대 = 저경쟁 구간</span></p>
+</section>
+
+<!-- 11 -->
+<section class="s">
+  <div class="kick">03 / 분류 — 시즌</div>
+  <h2>지금 경쟁사는 <span class="yl">기말</span>에 몰려 있다</h2>
+  <table>
+    <tr><th style="width:250px">시즌 키워드</th><th class="c" style="width:120px">출현</th><th>해석</th></tr>
+    <tr><td><b>기말 / 내신</b></td><td class="c mono">14 / 14</td><td>"기말고사까지 단 4주", "기말역전반"</td></tr>
+    <tr><td>수능</td><td class="c mono">7</td><td>1:1은 고등 주력 — 아라온은 <b>비대상</b></td></tr>
+    <tr><td>방학 (겨울방학 1)</td><td class="c mono">3</td><td rowspan="3" class="ok">아직 비어 있다 = <b>선점 구간</b><br>2주 뒤면 전부 몰려온다</td></tr>
+    <tr><td>예비고</td><td class="c mono">2</td></tr>
+    <tr><td>예비중</td><td class="c mono">0</td></tr>
+  </table>
+  <p class="sub">기말로 들어가면 14건과 정면으로 붙는다. 겨울방학·예비 학년은 거의 비어 있다.<br>단 <b>예비고1까지</b> — 고2는 우리 타겟이 아니다.</p>
+</section>
+
+<!-- 12 -->
+<section class="s">
+  <div class="kick">03 / 분류 — 시즌</div>
+  <h2>아라온 성수기는 <span class="tl">시험 직후</span>다</h2>
+  <p>경쟁사는 <b>시험 대비</b>에 몰린다. "4주 남았다" + 단기 특강 오퍼가 그 시즌의 무기다. 그건 단기 점수 상품의 무기다. 우리는 <b>관리 구조</b>를 판다 — 같은 시즌에 같은 말로 들어갈 이유가 없다.</p>
+  <p>반대로 <b class="tl">성적표가 나온 직후</b>가 우리 구간이다. 이때 "학원이 안 맞는 것 같다"가 폭증하고, 그게 정확히 우리 타겟 정의다. 경쟁사는 이때 조용하다.</p>
+  <p class="sub"><b class="tl">5월 말 · 7월 · 10월 말 · 12월 말</b><br>
+  시험 대비 시즌에 돌릴 때는 점수 약속이 아니라 "다음 시험까지 뭘 바꿀 것인가"로 각도를 튼다.</p>
+</section>
+
+<!-- 13 -->
+<section class="s">
+  <div class="kick">04 / 가용성 — 핵심</div>
+  <h2>경쟁사가 쓴다고 <span class="tl">우리도 쓰는 게 아니다</span></h2>
+  <table>
+    <tr><td class="c ok" style="width:180px">우리 강점</td><td>우리가 가졌고 경쟁사는 덜 쓰는 것 → <b>여기서 승부한다</b></td></tr>
+    <tr><td class="c mid">교집합</td><td>둘 다 쓸 수 있는 것 → 표현으로 차별화해야 한다</td></tr>
+    <tr><td class="c no">불가능</td><td>상품·정책상 없는 카드 → <b>설계에서 처음부터 뺀다</b></td></tr>
+  </table>
+  <p class="sub">넛지 13종 · 훅 11종 전체 판정표는 배포자료 3면. 지금은 결론 세 개만 본다.</p>
+</section>
+
+<!-- 14 -->
+<section class="s">
+  <div class="kick">04 / 가용성 — 결론 1</div>
+  <h2>경쟁사가 <span class="yl">몰린 칸</span>에는 들어가지 않는다</h2>
+  <div class="big yl" style="margin-bottom:22px">무료 체험 35건</div>
+  <p>79종 중 35건이 같은 카드를 쓰고 있다. 이미 포화된 칸이다. 같은 오퍼를 들고 들어가면 학부모 눈에는 <b>"또 무료 체험"</b>으로 묶인다.</p>
+  <p>우리는 이 칸에서 경쟁하지 않는다. 진단 · 관리 구조 · 과정 숫자로 다른 칸에 선다.</p>
+  <p class="sub">설계에서 제외하는 카드 — 무료 체험 · 환불 보장 · 선착순 · 대치동 프레임<br>"무료 진단" 표현 대신 <b class="tl">공부PT 인바디</b></p>
+</section>
+
+<!-- 15 -->
+<section class="s">
+  <div class="kick">04 / 가용성 — 결론 2</div>
+  <h2>우리는 <span class="tl">경쟁사가 비워둔 칸</span>에 선다</h2>
+  <table>
+    <tr><th style="width:280px">저경쟁 구간</th><th class="c" style="width:90px">빈도</th><th>우리가 가진 것</th></tr>
+    <tr><td>자기진단 체크리스트</td><td class="c mono">7</td><td class="ok">공부PT 인바디가 정확히 이것</td></tr>
+    <tr><td>호기심 갭</td><td class="c mono">5</td><td class="ok">진단 결과를 랜딩에서 주는 구조와 맞음</td></tr>
+    <tr><td>정보·반전</td><td class="c mono">6</td><td class="ok">학교 평가계획 · 학사일정 데이터</td></tr>
+    <tr><td>구체적 숫자</td><td class="c mono">17</td><td class="ok">예습 10분 / 수업 40분 / 1룸 15명 / 오답 1~2분</td></tr>
+  </table>
+  <p class="sub">경쟁사 숫자는 대부분 <b>성과 숫자</b>인데, 우리는 <b class="tl">과정 숫자</b>를 댈 수 있다. 이게 차별점이다.</p>
+</section>
+
+<!-- 16 -->
+<section class="s">
+  <div class="kick">04 / 가용성 — 결론 3</div>
+  <h2>훅은 <span class="tl">페인 공감</span>이 우리 자리다</h2>
+  <p>우리 타겟은 <b>"학원이 안 맞는 것 같다"고 이미 느끼는 학부모</b>다. "어떤 학원이 좋을까" 탐색 중인 학부모가 아니다. 타겟 정의와 훅이 일치하는 칸은 여기뿐이다.</p>
+  <p class="sub" style="margin-top:26px"><b class="rd">단, 대조(학원 vs)는 불가.</b> 학원 비교표 프레임은 쓰지 않는다. 대신 <b>"학원 다녀도 그대로라면"</b>처럼 학부모 자기 경험의 재진술로 바꾼다 — 같은 효과, 다른 프레임.</p>
+</section>
+
+<!-- 17 -->
+<section class="s">
+  <div class="kick">05 / 설계</div>
+  <h2>문장의 출처는 <span class="tl">통화</span>다</h2>
+  <p>경쟁사 소재에서 가져오는 건 <b>형식</b>이다. 문장을 가져오면 훅 구조가 같아져 둘 다 성과가 떨어진다. 학부모 말을 매일 직접 듣는 건 <b>상담 현장</b>뿐이다.</p>
+  <table style="margin-top:22px">
+    <tr><th style="width:50%">요약해버린 말 — 못 씀</th><th>들은 그대로 — 훅이 됨</th></tr>
+    <tr><td>학원 효과가 없다고 하심</td><td class="ok">"학원은 3년 보냈는데 성적이 그대로예요"</td></tr>
+    <tr><td>패드학습 불만족</td><td class="ok">"혼자 터치만 하다 끝나요"</td></tr>
+    <tr><td>아이가 집중을 못 함</td><td class="ok">"앉아는 있는데 뭘 했는지를 몰라요"</td></tr>
+  </table>
+  <p class="sub">발굴할 곳 — 어제·지난주 통화 / 상담 메모의 따옴표 / <b>취소·이탈 사유</b>(가장 솔직한 말) / "학원이 안 맞는 것 같아요" 계열</p>
+</section>
+
+<!-- 18 -->
+<section class="s">
+  <div class="kick">실습 · 12분</div>
+  <h1>구성표 <span class="tl">1장</span>을<br>채운다</h1>
+  <p class="sub" style="font-size:19px">배포자료 4면 워크시트 · 15초 기준<br>
+  타겟 → 시즌 → 쓸 훅·넛지 → 훅 3초 → 공감 → 구조 1개 → 남겨둘 궁금증 → CTA</p>
+</section>
+
+<!-- 19a -->
+<section class="s">
+  <div class="kick">06 / 촬영</div>
+  <h2>편집은 <span class="tl">찍을 때</span> 절반이 끝난다</h2>
+  <table>
+    <tr><td style="width:280px"><b>앞뒤 여유 2초</b></td><td>녹화 누르고 2초 뒤 동작 시작, 끝나고 2초 더 — 잘라낼 여유</td></tr>
+    <tr><td><b>같은 장면 2~3번</b></td><td>한 번은 넓게(책상 전체), 한 번은 가깝게(손·노트) — 컷 바꿀 재료</td></tr>
+    <tr><td><b>피사체는 가운데</b></td><td>1:1로 자르면 위아래가 잘린다</td></tr>
+    <tr><td><b>폰은 고정</b></td><td>움직이는 건 손과 노트. 걸으면서 찍지 않는다</td></tr>
+    <tr><td><b>빛은 앞에서</b></td><td>창문을 바라보는 방향. 창을 등지면 역광</td></tr>
+  </table>
+  <p class="sub">15초 소재 하나에 <b class="tl">최소 8컷</b>을 찍어둔다. 재료가 없으면 한 화면을 오래 보여주게 되고, 그게 이탈의 1순위다.</p>
+</section>
+
+<!-- 19b -->
+<section class="s">
+  <div class="kick">06 / 편집 문법</div>
+  <h2>15초는 <span class="tl">8~9컷</span>이다</h2>
+  <table style="font-size:15px">
+    <tr><th class="c">0–1.5</th><th class="c">1.5–3</th><th class="c">3–5</th><th class="c">5–7</th><th class="c">7–9</th><th class="c">9–10.5</th><th class="c">10.5–12</th><th class="c">12–15</th></tr>
+    <tr><td>문제집<br>클로즈업</td><td>넘기는 손</td><td>펜 돌리는 손</td><td>빈칸 숙제</td><td>오답노트<br>펼침</td><td>빨간펜<br><span class="yl">0.7배</span></td><td>노트 넘김<br><span class="yl">2배</span></td><td>책상 넓게<br>+ CTA</td></tr>
+  </table>
+  <div class="two" style="margin-top:22px">
+    <div class="card k"><h3>머리·꼬리 자르기</h3><p>모든 컷 앞뒤 0.3~0.5초를 날린다. 손이 들어오는 순간, 멈칫하는 순간이 여기 있다</p></div>
+    <div class="card k"><h3>동작에서 끊고 동작으로 잇기</h3><p>노트를 <b>펴는 중간</b>에 끊고, 다음 컷은 <b>펴진 상태</b>로 시작. 컷이 바뀐 걸 못 느낀다</p></div>
+  </div>
+  <p class="sub">한 컷 2초를 넘기면 쪼갠다 · 넓게→가깝게(상황→디테일) · 말하는 영상은 "음…" 잘라 붙이기 &nbsp;|&nbsp; 전체 6개는 배포자료 5면</p>
+</section>
+
+<!-- 19c -->
+<section class="s">
+  <div class="kick">제작 실례 ① — 레퍼런스에서 구성표로</div>
+  <h2>예시 A를 <span class="tl">끝까지</span> 만들어 본다</h2>
+  <div class="two">
+    <div class="card r">
+      <h3>피드에서 멈춘 경쟁사 소재 — 가져온 것</h3>
+      <p><b>형식만</b> 가져온다</p>
+      <p>· 첫 컷이 손·교재 클로즈업 — 얼굴 없음<br>· 큰 자막 2줄, 화면 가운데<br>· 음성 없이 BGM만 — 소리 꺼도 이해됨</p>
+      <p style="color:#ff9b9b">가져오지 않은 것 — 문장, 무료체험 오퍼</p>
+    </div>
+    <div class="card k">
+      <h3>우리 구성표 — 채운 것</h3>
+      <p>· 타겟 — 학원 이탈 / 중2 학부모<br>· 시즌 — 기말 직후 성적표 구간<br>· 훅·넛지 — 페인 공감 + 자기진단 + 호기심 갭<br>· 구조 — 5단계 중 <b>4단계(오답노트)만</b><br>· 문장 — 통화에서 들은 말 "3년 보냈는데 그대로예요"</p>
+    </div>
+  </div>
+  <p class="sub">형식은 검증된 것을, 메시지는 우리 것을. 이 구성표 한 장이 다음 장의 8컷이 된다.</p>
+</section>
+
+<!-- 19d -->
+<section class="s top">
+  <div class="kick">제작 실례 ② — 스토리보드 8컷 · 15초</div>
+  <h2 style="margin-bottom:18px">구성표가 <span class="tl">화면</span>이 되면</h2>
+  <div class="sb"><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[클로즈업]<br>채점 안 된 문제집</div><div class="cp">3년 보냈는데<br>그대로였다면</div><div class="tm">0.0–1.5</div></div><div class="fl">① 가깝게 시작 — 뭐지?</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[손]<br>페이지를 넘김</div><div class="cp">3년 보냈는데<br>그대로였다면</div><div class="tm">1.5–3.0</div></div><div class="fl">② 동작에서 끊기</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[손]<br>멍하니 펜 돌리기</div><div class="cp">숙제는 했는데</div><div class="tm">3.0–5.0</div></div><div class="fl">③ 공감 자막 시작</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[넓게]<br>빈칸 많은 숙제</div><div class="cp">뭘 틀렸는지 모른 채<br>다음 주로</div><div class="tm">5.0–7.0</div></div><div class="fl">④ 같은 구간 자막 유지</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[클로즈업]<br>오답노트 펼치기</div><div class="cp">틀린 문제는 전부</div><div class="tm">7.0–9.0</div></div><div class="fl">⑤ 펴는 동작에서 이어받기</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[클로즈업]<br>빨간펜 해설</div><div class="cp">1~2분씩 해설</div><div class="tm">9.0–10.5</div><div class="sp">0.7배</div></div><div class="fl">⑥ 강조 = 느리게</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[손]<br>노트 넘기기</div><div class="cp">오답노트까지 제출</div><div class="tm">10.5–12.0</div><div class="sp">2배</div></div><div class="fl">⑦ 과정 = 빠르게</div></div><div><div class="fr"><div class="sz t"></div><div class="sz b"></div><div class="sc">[넓게]<br>정돈된 책상</div><div class="cp cta">공부PT 인바디<br>프로필 링크</div><div class="tm">12.0–15.0</div></div><div class="fl">⑧ CTA — 3초 유지</div></div></div>
+  <p class="sub" style="margin-top:14px"><span class="rd">빗금 = 릴스 UI가 가리는 상하 15%</span> — 자막은 절대 여기에 두지 않는다 &nbsp;|&nbsp; 자막은 컷이 바뀌어도 <b>구간 단위로 유지</b></p>
+</section>
+
+<!-- 19e -->
+<section class="s">
+  <div class="kick">제작 실례 ③ — 같은 메시지, 단일 이미지</div>
+  <h2>단일 이미지는 <span class="tl">4개 구역</span>이면 끝난다</h2>
+  <div style="display:flex;gap:44px;align-items:center">
+    <div class="wf">
+      <div class="z" style="top:30px;height:92px;font-size:26px;line-height:1.25">3년 보냈는데<br>그대로였다면<span class="tag">① 훅</span></div>
+      <div class="z" style="top:134px;height:150px;font-size:14px;font-weight:600;color:#6b7378">[사진] 오답노트 + 빨간펜 해설<br>클로즈업<span class="tag">② 비주얼</span></div>
+      <div class="z" style="top:296px;height:36px;font-size:12.5px;font-weight:600;padding-right:44px">틀린 문제 전부 1~2분 해설 · 오답노트 제출<span class="tag">③ 근거</span></div>
+      <div class="z" style="top:342px;height:36px;font-size:14px;background:#3a4146;color:#fff;border-style:solid">공부PT 인바디 신청 →<span class="tag" style="background:#00cfb2;color:#06110f">④ CTA</span></div>
+    </div>
+    <div class="anno">
+      <p class="anno"><b>① 훅</b> — 릴스 첫 자막과 같은 문장. 화면에서 가장 크게. 2줄 이내</p>
+      <p class="anno" style="margin-top:12px"><b>② 비주얼</b> — 실물 사진 1장. 스톡 이미지보다 우리 교재·노트 실물</p>
+      <p class="anno" style="margin-top:12px"><b>③ 근거</b> — 5단계 중 1개만. 한 줄</p>
+      <p class="anno" style="margin-top:12px"><b>④ CTA</b> — 행동 하나. 브랜드명은 여기 함께</p>
+      <p class="sub" style="margin-top:22px">규격 1080×1080 · 색은 매번 레퍼런스 확인<br>릴스 1편을 만들면 <b class="tl">단일 이미지 1장은 같은 날 같이</b> 만든다</p>
+    </div>
+  </div>
+</section>
+
+<!-- 19 -->
+<section class="s">
+  <div class="kick">06 / 제작</div>
+  <h2>캡컷 — 틀리면 처음부터 다시 하는 것</h2>
+  <div class="two">
+    <div class="card r"><h3>비율을 맨 처음에</h3><p>프로젝트 만들고 바로 <b>1:1</b>. 편집 다 하고 바꾸면 자막이 전부 잘린다</p></div>
+    <div class="card r"><h3>자막은 가운데 70%</h3><p>상하 각 15%는 비운다. 릴스 UI가 그 영역을 가린다</p></div>
+  </div>
+  <div class="two" style="margin-top:22px">
+    <div class="card r"><h3>워터마크 제거</h3><p>맨 끝 캡컷 로고 클립 삭제. <b>템플릿 기능은 쓰지 않는다</b> — 지워도 남는다</p></div>
+    <div class="card k"><h3>파일명 규칙</h3><p class="mono" style="color:#00cfb2">1116_파인더_학원_그대로였다면_v1</p><p>안 지키면 2주 뒤 성과 대조가 불가능하다</p></div>
+  </div>
+  <p class="sub">전체 7단계는 배포자료 6면. 지금은 시연으로 본다.</p>
+</section>
+
+<!-- 20 -->
+<section class="s">
+  <div class="kick">07 / 판정</div>
+  <h2>리뷰는 <span class="tl">3초만</span> 본다</h2>
+  <p>처음 3초만 재생하고 멈춘다. 보는 사람이 <b>"이거 누구한테 하는 말이야?"</b>에 한 번에 답하지 못하면 훅부터 다시 만든다. 전체를 다 보고 하는 피드백은 하지 않는다 — <b>학부모도 끝까지 안 본다.</b></p>
+  <table style="margin-top:24px">
+    <tr><td style="width:260px"><b>매일 보는 것</b></td><td>3초 유지율 · 평균 시청시간 · CTR · CPM · 빈도</td></tr>
+    <tr><td><b>주간 리뷰에서</b></td><td>ROAS (결제일 기준) → 증액 · 중단 결정</td></tr>
+    <tr><td class="no">단독 판단 금지</td><td>CPL — 싸게 모았는데 매출이 안 나는 소재가 가장 위험하다</td></tr>
+  </table>
+</section>
+
+<!-- 21 -->
+<section class="s">
+  <div class="kick">숙제 · 다음 리뷰까지</div>
+  <h2>세 가지</h2>
+  <ul>
+    <li><b>피드 수집 5건</b> — 멈춘 교육 광고 캡처 + 왜 멈췄는지 한 줄</li>
+    <li><b>학부모 발화 10개</b> — 말투 그대로, 요약 금지</li>
+    <li><b>오늘 구성표로 릴스 1편 제작 · 집행</b></li>
+  </ul>
+  <p class="sub">상담 3인이 모은 발화 30개가 다음 분기 훅 뱅크의 원자료가 된다.</p>
+</section>
+
+<!-- 22 -->
+<section class="s">
+  <h1>질문</h1>
+  <p class="sub" style="font-size:19px">배포자료 — 분류 전체 목록 · 가용성 판정표 · 구성표 워크시트 · 캡컷 7단계 · 금지어 · 체크리스트</p>
+</section>
+
+</div>
+
+<div class="nav"><div id="prev"></div><div id="next"></div></div>
+<div id="tip">← → 또는 클릭 · F 전체화면 · P 인쇄</div>
+<div id="hud"></div>
+<div id="bar"></div>
+
+<script>
+(function(){
+  var cv=document.getElementById('canvas'),
+      S=[].slice.call(cv.querySelectorAll('.s')), i=0;
+
+  function fit(){
+    var k=Math.min(window.innerWidth/1280, window.innerHeight/720);
+    cv.style.transform='scale('+k+')';
+  }
+  function go(n){
+    i=Math.max(0,Math.min(S.length-1,n));
+    for(var k=0;k<S.length;k++) S[k].classList.toggle('on',k===i);
+    document.getElementById('hud').textContent=(i+1)+' / '+S.length;
+    document.getElementById('bar').style.width=((i+1)/S.length*100)+'%';
+    try{location.hash=i+1;}catch(e){}
+  }
+  window.addEventListener('resize',fit);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(S.length-1);}
+    else if(e.key==='p'||e.key==='P'){window.print();}
+    else if(e.key==='f'||e.key==='F'){
+      if(document.fullscreenElement){document.exitFullscreen();}
+      else{document.documentElement.requestFullscreen();}
+    }
+  });
+  document.getElementById('next').onclick=function(){go(i+1);};
+  document.getElementById('prev').onclick=function(){go(i-1);};
+  fit();
+  var h=parseInt((location.hash||'').replace('#',''),10);
+  go(h>0?h-1:0);
+  // 웹폰트 로드 후 재배치
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

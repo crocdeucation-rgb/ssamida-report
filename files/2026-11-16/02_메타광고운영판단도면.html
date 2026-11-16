@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>아라온 그로스 설계 아카이브 · 02 메타광고 운영·판단 도면</title>
+<style>
+  :root{
+    --ink:#1c2433; --sub:#5a6579; --line:#e2e7f0; --bg:#f6f8fb; --card:#fff;
+    --accent:#2f6df0; --accent-soft:#eaf1fe;
+    --warn:#b4520a; --warn-bg:#fff4e8; --warn-line:#f2c898;
+    --good:#0f7a52; --good-bg:#e9f7f0;
+    --tip:#5a3fb8; --tip-bg:#f0ecfb;
+    --shot:#8794aa; --shot-bg:#f0f3f8;
+    box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:20px}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif; font-size:17px; line-height:1.85; -webkit-text-size-adjust:100%}
+  .wrap{max-width:860px; margin:0 auto; padding:0 20px 120px}
+  .savebar{position:sticky; top:0; z-index:100; background:var(--ink); color:#fff; padding:12px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 2px 12px rgba(20,30,60,.18)}
+  .savebar .sb-msg{font-size:14px; font-weight:600; flex:1; min-width:180px; line-height:1.5}
+  .savebar .sb-msg b{color:#7fb0ff}
+  .savebar button{border:0; border-radius:9px; font:inherit; font-weight:800; font-size:14px; padding:9px 18px; cursor:pointer; background:#2f6df0; color:#fff}
+  .savebar button:hover{background:#255cd6}
+  @media print{
+    .savebar,.totop{display:none !important}
+    @page{ size:A4; margin:12mm 12mm 14mm; }
+    html,body{ background:#fff !important; font-size:10.5px !important; line-height:1.6 !important; }
+    .wrap{ max-width:100% !important; padding:0 !important; }
+    section{ break-inside:avoid; page-break-inside:avoid; border:1px solid #d8dee8 !important; border-radius:10px !important; padding:16px 18px 18px !important; margin:0 0 10px !important; box-shadow:none !important; }
+    section:has(.steps){ break-inside:auto; page-break-inside:auto; }
+    header{ padding:0 0 14px !important; margin-bottom:6px !important; break-after:avoid; }
+    h1{ font-size:20px !important; } h2.sec{ font-size:15px !important; } h3{ font-size:12.5px !important; margin:14px 0 6px !important; break-after:avoid; }
+    .sec-sub,.lede{ font-size:10px !important; } p{ font-size:10.5px !important; margin:0 0 8px !important; }
+    .flow{ font-size:9px !important; padding:12px 14px !important; break-inside:avoid; }
+    nav.toc{ break-inside:avoid; page-break-inside:avoid; padding:14px 18px !important; margin:14px 0 18px !important; } nav.toc a{ padding:6px 0 !important; font-size:11px !important; }
+    .steps>li{ break-inside:avoid; page-break-inside:avoid; margin-bottom:14px !important; }
+    .box{ break-inside:avoid; page-break-inside:avoid; padding:12px 14px !important; font-size:10px !important; margin:10px 0 !important; }
+    table.cmp{ break-inside:avoid; page-break-inside:avoid; font-size:9.5px !important; } table.cmp th,table.cmp td{ padding:7px 9px !important; }
+    .field{ break-inside:avoid; page-break-inside:avoid; } .field-row .k,.field-row .v{ font-size:10px !important; padding:8px 12px !important; }
+    .shot .imgtools,.shot .hint{ display:none !important; }
+    .shot{ break-inside:avoid; page-break-inside:avoid; padding:4px !important; } .shot img{ max-width:100% !important; max-height:150mm !important; object-fit:contain; } .shot:not(.filled){ display:none !important; }
+    .sec-num{ font-size:10px !important; } code{ font-size:9.5px !important; } footer{ font-size:9px !important; }
+  }
+  header{padding:44px 0 28px; border-bottom:3px solid var(--ink); margin-bottom:8px}
+  .kicker{font-size:14px; color:var(--accent); font-weight:800; letter-spacing:.5px; margin-bottom:10px}
+  h1{font-size:33px; line-height:1.25; margin:0 0 14px; font-weight:900; letter-spacing:-.5px}
+  .lede{font-size:17px; color:var(--sub); margin:0}
+  .meta-row{margin-top:18px; font-size:14px; color:var(--sub); display:flex; flex-wrap:wrap; gap:8px 18px}
+  .meta-row b{color:var(--ink)}
+  nav.toc{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px 26px; margin:26px 0 40px}
+  nav.toc h2{font-size:15px; margin:0 0 14px; color:var(--sub); font-weight:800; letter-spacing:.3px}
+  nav.toc ol{margin:0; padding-left:0; list-style:none; counter-reset:toc}
+  nav.toc li{counter-increment:toc; border-top:1px solid var(--line)}
+  nav.toc li:first-child{border-top:none}
+  nav.toc a{display:flex; gap:14px; padding:11px 0; text-decoration:none; color:var(--ink); font-weight:600; align-items:baseline}
+  nav.toc a:hover{color:var(--accent)}
+  nav.toc a::before{content:counter(toc,decimal-leading-zero); font-size:14px; color:var(--accent); font-weight:800; min-width:26px}
+  section{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:34px 34px 38px; margin:20px 0}
+  .sec-num{display:inline-block; font-size:14px; font-weight:800; color:var(--accent); background:var(--accent-soft); padding:4px 12px; border-radius:20px; margin-bottom:14px}
+  h2.sec{font-size:26px; margin:0 0 8px; font-weight:900; letter-spacing:-.4px; line-height:1.3}
+  .sec-sub{color:var(--sub); font-size:16px; margin:0 0 24px}
+  h3{font-size:19px; margin:32px 0 10px; font-weight:800}
+  p{margin:0 0 16px}
+  strong{font-weight:800}
+  .box{border-radius:12px; padding:18px 22px; margin:18px 0; font-size:16px; line-height:1.75}
+  .box p:last-child{margin-bottom:0}
+  .box .bt{font-weight:800; display:block; margin-bottom:6px; font-size:15px}
+  .warn{background:var(--warn-bg); border:1px solid var(--warn-line)}
+  .warn .bt{color:var(--warn)}
+  .good{background:var(--good-bg); border:1px solid #b6e2cd}
+  .good .bt{color:var(--good)}
+  .tip{background:var(--tip-bg); border:1px solid #d6c9f2}
+  .tip .bt{color:var(--tip)}
+  .field{border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:16px 0}
+  .field-row{display:flex; border-top:1px solid var(--line)}
+  .field-row:first-child{border-top:none}
+  .field-row .k{background:var(--bg); padding:12px 16px; font-weight:800; width:40%; font-size:15px; display:flex; align-items:center}
+  .field-row .v{padding:12px 16px; width:60%; font-size:15px}
+  .field-row .v code{background:var(--accent-soft); color:var(--accent); padding:2px 8px; border-radius:6px; font-size:14px; font-family:inherit; font-weight:700}
+  .rule{height:1px; background:var(--line); margin:34px 0; border:none}
+  .shot{position:relative; background:var(--shot-bg); border:2px dashed var(--shot); border-radius:12px; padding:26px 20px; text-align:center; color:var(--shot); font-weight:700; font-size:15px; margin:14px 0; line-height:1.5; cursor:pointer}
+  .shot:hover{border-color:var(--accent); background:#eef3fb}
+  .shot.dragover{border-color:var(--accent); background:var(--accent-soft); border-style:solid}
+  .shot .hint{display:block; font-size:13px; opacity:.75; margin-bottom:6px; font-weight:600}
+  .shot .hint::before{content:"📷 여기를 누르거나, 캡처한 그림을 끌어다 놓으세요"}
+  .shot .desc{color:var(--ink); font-size:15px; font-weight:600; opacity:.85}
+  .shot.filled{padding:8px; border-style:solid; border-color:#cfd8e6; background:#fff; cursor:default}
+  .shot.filled .hint,.shot.filled .desc{display:none}
+  .shot img{max-width:100%; border-radius:8px; display:block; margin:0 auto}
+  .shot .imgtools{display:none}
+  .shot.filled .imgtools{display:flex; gap:8px; justify-content:center; margin-top:8px; padding-bottom:4px}
+  .shot .imgtools button{border:1px solid var(--line); background:#fff; color:var(--sub); font:inherit; font-size:13px; font-weight:700; padding:5px 12px; border-radius:8px; cursor:pointer}
+  .shot input[type=file]{display:none}
+  footer{margin-top:50px; padding-top:24px; border-top:1px solid var(--line); color:var(--sub); font-size:14px; text-align:center}
+  .totop{position:fixed; right:20px; bottom:calc(20px + env(safe-area-inset-bottom,0px)); background:var(--ink); color:#fff; width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; box-shadow:0 6px 20px rgba(20,30,60,.25); opacity:.85}
+  @media(max-width:640px){body{font-size:16px} .wrap{padding:0 16px 100px} section{padding:26px 20px 30px} h1{font-size:26px} h2.sec{font-size:22px} .field-row{flex-direction:column} .field-row .k,.field-row .v{width:100%} .field-row .v{border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="savebar">
+  <span class="sb-msg">그림·표가 필요하면 <b>점선 칸</b>에 캡처를 넣고, <b>저장</b>으로 완성본을 내려받으세요.</span>
+  <button onclick="saveDoc()">💾 완성본 저장</button>
+</div>
+
+<header>
+  <div class="kicker">아라온 그로스 설계 아카이브 · 도면 02</div>
+  <h1>메타광고 운영·판단 도면<br><span style="font-size:20px;color:var(--sub);font-weight:700">"제대로" 운영하기 — 개념 · 판단 · 함정</span></h1>
+  <p class="lede">1편이 "광고 하나 올리는 법"이라면, 이 문서는 "광고를 돈 값 하게 굴리는 법"입니다. 왜 이렇게 하는지 이유까지 담았습니다. 숫자를 다루는 판단이 많아, 광고를 이어받을 담당자가 차분히 읽고 이해하는 것을 전제로 합니다.</p>
+  <div class="meta-row">
+    <span>인수인계 <b>신상준 이사</b></span>
+      <span>대상 <b>김상현 · 김윤호 · 장윤호 · 우혜림</b></span>
+    <span>수준 <b>중급 이상</b></span>
+    <span>보안등급 <b>대외비</b></span>
+    <span>최종수정 <b>2026-11-16</b></span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>이 문서의 순서</h2>
+  <ol>
+    <li><a href="#intro">1편과 무엇이 다른가 · 올리기 vs 운영하기</a></li>
+    <li><a href="#adv">어드밴티지+ 완전 이해 · 연령 25세 천장과 딜리버리 함정</a></li>
+    <li><a href="#capi">메타 픽셀 &amp; 전환 API(CAPI) · 오더하는 사람을 찾게 하기</a></li>
+    <li><a href="#fifty">주간 50건 룰 · 최적화 이벤트와 목표·예산 설정</a></li>
+    <li><a href="#budget">예산 운영 · 20% 룰, 증액 3조건, 자동 멈춤, 삭감 함정</a></li>
+    <li><a href="#clone">캠페인 무한복제 금지 · 자기잠식(옥션 겹침)</a></li>
+    <li><a href="#judge">소재 판정 · ROAS가 기준, CPL은 함정</a></li>
+    <li><a href="#chaeri">실전 사례 · 채리 사건 (딜리버리 붕괴)</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section id="intro">
+  <span class="sec-num">들어가기</span>
+  <h2 class="sec">1편과 무엇이 다른가</h2>
+  <p class="sec-sub">같은 메타 광고지만, 하는 일이 완전히 다릅니다.</p>
+  <div class="field">
+    <div class="field-row"><div class="k">1편 (올리기)</div><div class="v">버튼을 순서대로 눌러 광고를 게시하는 법. 한 번 하면 끝.</div></div>
+    <div class="field-row"><div class="k">2편 (운영하기)</div><div class="v">올린 광고가 <b>돈 값을 하는지</b> 매일 보고, 끄고·켜고·올리고·내리는 판단. 끝이 없음.</div></div>
+  </div>
+  <p>광고는 올리는 게 10%, <strong>굴리는 게 90%</strong>입니다. 잘못 굴리면 돈만 나가고 신청(리드)은 안 들어옵니다. 이 문서는 그 "굴리는 판단"의 원칙을 담았습니다.</p>
+  <div class="box tip">
+    <span class="bt">이 문서를 읽는 자세</span>
+    <p>외우려 하지 마세요. <b>"왜 이렇게 하는가"</b>를 이해하면 됩니다. 메타 화면은 계속 바뀌지만, 아래 원리는 잘 안 바뀝니다. 원리를 알면 화면이 바뀌어도 판단할 수 있습니다.</p>
+  </div>
+</section>
+
+<!-- 2 어드밴티지+ -->
+<section id="adv">
+  <span class="sec-num">핵심 개념 1</span>
+  <h2 class="sec">어드밴티지+ 완전 이해</h2>
+  <p class="sec-sub">메타 광고에서 가장 많이 오해하는 것. 이것만 이해해도 절반은 됩니다.</p>
+
+  <h3>어드밴티지+란 무엇인가</h3>
+  <p>예전에는 "35~45세 여성, 교육 관심사"처럼 <strong>우리가 타겟을 직접 정했습니다.</strong> 지금 메타는 "타겟은 우리(메타 AI)가 알아서 찾을게요"라고 합니다. 이게 <strong>어드밴티지+ 오디언스</strong>입니다. 우리가 소재와 목표만 주면, 메타가 "이 광고에 반응할 사람"을 알아서 찾습니다.</p>
+
+  <div class="box warn">
+    <span class="bt">가장 중요한 사실 — 우리가 넣은 타겟은 "제안"일 뿐</span>
+    <p>어드밴티지+가 켜져 있으면, 우리가 설정한 <b>나이·성별·관심사는 그냥 "참고용 제안"</b>입니다. 메타는 무시할 수 있고, 실제로 무시합니다. <b>메타가 반드시 지키는 것은 딱 세 가지뿐입니다:</b></p>
+  </div>
+  <div class="field">
+    <div class="field-row"><div class="k">메타가 꼭 지키는 것 (하드 컨트롤)</div><div class="v">① 지역(위치) &nbsp; ② 최소 연령 &nbsp; ③ 언어</div></div>
+    <div class="field-row"><div class="k">제안일 뿐 (메타가 무시 가능)</div><div class="v">나이 범위(최대), 성별, 관심사, 상세 타겟</div></div>
+  </div>
+
+  <h3>★ 최소 연령은 "25세"가 천장입니다</h3>
+  <p>어드밴티지+를 쓰는 한, 최소 연령은 <strong>18~25세 사이에서만</strong> 정할 수 있습니다. 즉 "최소 30세"처럼 25세보다 높게는 <strong>강제할 수 없습니다.</strong> "37~59세 학부모만" 보여주고 싶어도, 어드밴티지+가 켜져 있으면 그건 제안일 뿐 — 메타는 25세 이하·젊은 층에도 광고를 뿌립니다.</p>
+  <div class="box warn">
+    <span class="bt">연령을 진짜 강제하려면 어드밴티지+를 꺼야 합니다</span>
+    <p>"반드시 37~59세만"으로 하려면 <b>어드밴티지+ 오디언스를 끄고</b> 기존 방식(상세 타겟)으로 바꿔야 합니다. 그럼 나이·성별이 제안이 아니라 <b>강제</b>가 됩니다. 단, 끄는 순간 <b>러닝(학습)이 리셋</b>되어 성과가 잠시 흔들립니다.</p>
+  </div>
+
+  <h3>왜 이게 중요한가 — 딜리버리 함정</h3>
+  <p>메타는 "싼 리드"를 잘 찾습니다. 그런데 <strong>싼 리드가 좋은 리드가 아닙니다.</strong> 예를 들어 25~34세는 폼(신청서)을 잘 냅니다. 그래서 메타는 "이 사람들한테 뿌리면 싸게 리드가 나오네?" 하고 그쪽으로 예산을 몰아버립니다. <strong>그런데 그들은 오더(결제)를 안 합니다.</strong> 우리 고객은 학부모(37~59세)인데 말입니다.</p>
+  <div class="box tip">
+    <span class="bt">한 줄 요약</span>
+    <p>어드밴티지+는 "싼 리드"를 찾지 "살 사람"을 찾는 게 아닙니다. 그래서 <b>오더 신호(CAPI)를 메타에 줘야</b> 메타가 "살 사람"을 찾기 시작합니다. 그게 다음 섹션입니다.</p>
+  </div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 광고세트 연령·성별 설정 화면 + "어드밴티지+ 오디언스" 토글 위치]</span><img src="img/02_메타광고운영판단도면/001_7800bcf045.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 3 CAPI -->
+<section id="capi">
+  <span class="sec-num">핵심 개념 2</span>
+  <h2 class="sec">메타 픽셀 &amp; 전환 API (CAPI)</h2>
+  <p class="sec-sub">"폼 내는 사람" 말고 "오더하는 사람"을 메타가 찾게 만드는 장치.</p>
+
+  <h3>문제였던 것 — 메타는 "구매자"를 몰랐다</h3>
+  <p>지금까지 메타에 간 신호는 <strong>"폼 제출(Lead)" 하나뿐</strong>이었습니다. 그래서 메타는 "폼 잘 내는 사람"을 찾아왔습니다. 그런데 폼 잘 내는 사람(25~34세)은 <strong>오더를 안 합니다.</strong> 메타는 누가 실제로 결제했는지 몰랐기 때문입니다.</p>
+
+  <h3>해결 — 노션 상태 변화를 메타에 다시 쏜다 (CAPI)</h3>
+  <p><strong>전환 API(CAPI, Conversion API)</strong>는 우리 노션(CRM)의 상태 변화를 메타에 거꾸로 알려주는 길입니다.</p>
+  <div class="field">
+    <div class="field-row"><div class="k">① 학부모가 폼 제출</div><div class="v">메타가 리드ID 발급 → 노션에 '리드ID' 저장</div></div>
+    <div class="field-row"><div class="k">② 상담팀이 상태 변경</div><div class="v">노션 상태를 '방문' 또는 '오더'로 바꿈</div></div>
+    <div class="field-row"><div class="k">③ CAPI가 메타에 전송</div><div class="v">"이 리드가 오더했다"를 메타에 알림</div></div>
+    <div class="field-row"><div class="k">④ 메타가 학습</div><div class="v">"오더하는 사람을 닮은 사람"을 찾기 시작</div></div>
+  </div>
+  <p>즉 <strong>픽셀</strong>이 "웹사이트·폼에서 일어난 일"을 메타에 보내는 기본 장치라면, <strong>CAPI</strong>는 "노션에서 일어난 일(방문·오더)"까지 메타에 보내주는 추가 장치입니다. 이게 있어야 메타가 "싼 리드"가 아니라 "살 사람"을 찾습니다.</p>
+
+  <div class="box warn">
+    <span class="bt">CAPI의 절대 제약 — 반드시 기억</span>
+    <p>① <b>event_time(이벤트 시간)은 7일 이내만</b> 허용됩니다. 7일 지난 과거 오더는 메타가 거부합니다 → <b>과거 소급 전송 불가.</b><br>
+    ② 효과가 나타나기까지 <b>약 1개월</b> 걸립니다 (메타 공식). 켜고 바로 효과를 기대하면 안 됩니다.<br>
+    ③ 이건 <b>개발·설정 영역</b>입니다. CAPI 코드가 꼬이면 조용히 아무것도 안 쏩니다 — 이상하면 담당자/개발에 반드시 확인.</p>
+  </div>
+  <div class="box tip">
+    <span class="bt">이벤트 매핑 (노션 상태 → 메타 이벤트)</span>
+    <p>방문 → <code>Schedule</code> &nbsp;·&nbsp; 오더·미납 → <code>Purchase</code>(매출 전송) &nbsp;·&nbsp; 결보·취소·당취 → <b>전송 안 함</b>(매출 0원)</p>
+  </div>
+  <h3>참고 화면</h3>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 노션 CRM의 "리드ID" 속성 — 폼 제출 시 메타 리드ID가 저장되는 칸]</span><img src="img/02_메타광고운영판단도면/002_a3d3613801.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: CAPI 전송 코드 — 아라위키 자동화 Code.gs의 sendFunnelCAPI / updateLeadFields 부분]</span><img src="img/02_메타광고운영판단도면/003_74cb312e6d.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 메타 이벤트 관리자 — Schedule·Purchase 이벤트가 실제로 들어오는 화면 (작동 확인용)]</span><img src="img/02_메타광고운영판단도면/004_c394e094f8.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 4 주간 50건 -->
+<section id="fifty">
+  <span class="sec-num">핵심 개념 3</span>
+  <h2 class="sec">주간 50건 룰 · 목표와 예산 설정</h2>
+  <p class="sec-sub">메타 알고리즘이 "학습"을 끝내려면 데이터가 일정량 필요합니다.</p>
+
+  <h3>왜 50건인가</h3>
+  <p>메타는 "최적화 이벤트"(우리가 목표로 삼은 행동)가 <strong>주 50건</strong> 정도 쌓여야 알고리즘이 안정적으로 학습합니다. 50건이 안 되면 메타가 "누구한테 뿌려야 할지" 확신을 못 해 성과가 들쭉날쭉합니다.</p>
+  <div class="box warn">
+    <span class="bt">★ 50건은 "광고세트 단위" 입니다</span>
+    <p>계정 전체가 아니라 <b>광고세트 하나당</b> 주 50건입니다. 그래서 광고세트를 너무 여러 개로 쪼개면, 각각이 50건을 못 채워 전부 학습 부족에 빠집니다. (아래 '무한복제 금지'와 연결)</p>
+  </div>
+
+  <h3>우리의 목표 설정 — 무엇을 최적화 이벤트로?</h3>
+  <p>최적화 이벤트는 "주 50건이 나오는 행동"이어야 합니다. 우리 퍼널에서:</p>
+  <div class="field">
+    <div class="field-row"><div class="k">폼 제출 (Lead)</div><div class="v">주 50건 쉽게 넘음 → 근데 "싼 리드" 함정 (오더 안 하는 사람)</div></div>
+    <div class="field-row"><div class="k">방문 (Schedule)</div><div class="v">전환율 약 11%, 주 50건 전후 → <b>최적화 후보</b></div></div>
+    <div class="field-row"><div class="k">오더 (Purchase)</div><div class="v">주 10여 건 → 50건 미달이라 <b>단독 최적화 불가</b></div></div>
+  </div>
+  <p>즉 "오더"로 바로 최적화하고 싶지만 건수가 부족합니다. 그래서 <strong>"방문"을 최적화 이벤트</strong>로 두는 게 현실적입니다. 단, 방문도 광고세트로 쪼개면 50건이 안 되니 <strong>광고세트 통합</strong>이 필요할 수 있습니다.</p>
+
+  <h3>예산은 목표에서 역산</h3>
+  <p>"주 50건 × 리드 단가(CPL)"로 필요한 최소 예산이 나옵니다. 예를 들어 방문 CPL이 높으면, 주 50 방문을 만들 예산이 그만큼 필요합니다. 예산이 목표 건수를 못 받치면 학습이 안 됩니다.</p>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 광고세트 성과 화면 — 주간 리드(또는 방문) 건수가 50건에 도달하는지 보이는 곳]</span><img src="img/02_메타광고운영판단도면/005_e96b719a17.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 5 예산 -->
+<section id="budget">
+  <span class="sec-num">운영 원칙 1</span>
+  <h2 class="sec">예산 운영</h2>
+  <p class="sec-sub">예산을 잘못 만지면 성과가 무너지거나 계정이 위험해집니다.</p>
+
+  <h3>증액은 "날짜가 아니라 지표"로</h3>
+  <div class="field">
+    <div class="field-row"><div class="k">증액 3조건 (전부 충족 시)</div><div class="v">① CPL 안정 (추세 하락 없음) ② 빈도 3 미만 ③ 직전 증액 후 3~4일 경과</div></div>
+    <div class="field-row"><div class="k">한 번에</div><div class="v"><b>20% 이내</b> (그 이상은 밴·러닝리셋 위험)</div></div>
+    <div class="field-row"><div class="k">빈도란</div><div class="v">같은 사람에게 몇 번 보여줬나. 빈도 3 미만 = 아직 소진 안 됨 = 올릴 여지 있음</div></div>
+  </div>
+  <div class="box good">
+    <span class="bt">왜 20%인가 · 왜 지표인가</span>
+    <p>한 번에 크게 올리면 메타 학습이 리셋되고, 이상 행동으로 감지돼 계정이 위험합니다. "빈도 1.1"은 같은 사람한테 1.1번밖에 안 보여줬다는 뜻 = 아직 보여줄 사람이 많다 = <b>올려도 됨</b>. 빈도가 3 넘으면 같은 사람한테 계속 보여주는 것 = 소진 = 올려도 낭비.</p>
+  </div>
+
+  <h3>★ 예산 바꾸면 광고가 자동으로 꺼질 수 있다</h3>
+  <div class="box warn">
+    <span class="bt">자동 PAUSED (일시중지) 함정</span>
+    <p>예산을 조정하면(특히 API/MCP로) 메타가 광고를 <b>자동으로 일시중지</b>시킬 때가 있습니다. 모르고 넘어가면 그날 광고가 안 나갑니다. <b>예산 바꾼 뒤엔 반드시 "게재 중"인지 다시 확인</b>하고, 꺼졌으면 다시 켜세요.</p>
+  </div>
+
+  <h3>삭감은 CPM 회복 수단이 아니다</h3>
+  <div class="box warn">
+    <span class="bt">예산 줄이면 오히려 더 싼(나쁜) 사람에게 간다</span>
+    <p>CPM(노출 단가)이 올랐다고 예산을 줄이면, 메타는 더 싼 인벤토리(질 낮은 노출)로 갑니다. 실제로 채리 캠페인은 삭감 후 CPM이 더 떨어졌습니다(싼 노출로 감). <b>삭감으로 CPM을 고치려 하지 마세요.</b></p>
+  </div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 광고세트 예산 수정 화면 — 일일 예산 입력란과 "빈도" 지표 위치]</span><img src="img/02_메타광고운영판단도면/006_c4c269d372.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 6 무한복제 -->
+<section id="clone">
+  <span class="sec-num">운영 원칙 2</span>
+  <h2 class="sec">캠페인 무한복제 금지 · 자기잠식</h2>
+  <p class="sec-sub">잘 되는 걸 복제해서 여러 개 돌리면 — 서로 잡아먹습니다.</p>
+
+  <h3>자기잠식(옥션 겹침)이란</h3>
+  <p>메타 광고는 <strong>경매(옥션)</strong>로 노출이 정해집니다. 같은 타겟을 노리는 우리 광고가 여러 개면, <strong>우리 광고끼리 같은 사람을 두고 경매에서 경쟁</strong>합니다. 즉 내 돈으로 내 광고 단가를 올리는 꼴 — 이게 <strong>자기잠식(cannibalization)</strong>입니다.</p>
+  <div class="box warn">
+    <span class="bt">잘 되는 소재를 복제·복제 하면 안 되는 이유</span>
+    <p>"이 소재 잘 되네?" 하고 똑같이 복제해서 여러 캠페인에 돌리면, ① 서로 옥션에서 경쟁해 단가 상승 ② 각 광고세트가 주 50건을 못 채워 학습 부족 ③ 메타가 어뷰징(악용)으로 의심. <b>삼중으로 손해</b>입니다.</p>
+  </div>
+
+  <h3>올바른 구조 — 다양성은 소재에, 판단은 캠페인 레벨에</h3>
+  <p>여러 소재를 테스트하고 싶으면, <strong>캠페인을 늘리지 말고 한 캠페인(또는 광고세트) 안에 소재(광고)를 여러 개</strong> 넣습니다. 그럼:</p>
+  <div class="field">
+    <div class="field-row"><div class="k">❌ 나쁜 구조</div><div class="v">소재마다 캠페인 따로 → 옥션 겹침 + 학습 부족</div></div>
+    <div class="field-row"><div class="k">✅ 좋은 구조</div><div class="v">한 캠페인 안에 소재 여러 개 → 메타가 그 안에서 위너를 골라줌, 옥션 안 겹침</div></div>
+  </div>
+  <div class="box tip">
+    <span class="bt">2026 구조 원칙</span>
+    <p>"다양성은 크리에이티브(소재)에, 판단은 캠페인 레벨에." 즉 소재는 여러 개 넣되, 캠페인·광고세트는 최대한 합쳐서 각각이 학습량(주 50건)을 채우게 합니다.</p>
+  </div>
+  <div class="box warn">
+    <span class="bt">소재 통합(병합)은 러닝 리셋을 각오</span>
+    <p>흩어진 위너 소재들을 한 캠페인으로 합치면, 메타가 처음부터 다시 학습합니다(러닝 리셋). 합친 직후 하루이틀은 성과가 요동치니, <b>3~4일은 지켜본 뒤</b> 판단하세요. 하루치로 "망했다" 판단 금지.</p>
+  </div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 캠페인 구조 화면 — 한 캠페인 아래 소재(광고)가 여러 개 들어간 올바른 구조]</span><img src="img/02_메타광고운영판단도면/007_305847822b.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 7 소재판정 -->
+<section id="judge">
+  <span class="sec-num">운영 원칙 3</span>
+  <h2 class="sec">소재 판정 · ROAS가 기준</h2>
+  <p class="sec-sub">어떤 소재를 끄고 어떤 소재를 밀지 — 판단의 핵심.</p>
+
+  <div class="box warn">
+    <span class="bt">★ CPL(리드 단가) 단독으로 판단하지 마세요</span>
+    <p>CPL이 싸다고 좋은 소재가 아닙니다. 실제로 CPL 1위 소재가 <b>오더 0</b>이었고, CPL 9위 소재가 <b>ROAS 3.78</b>이었습니다. <b>CPL은 리드의 가격이지 가치가 아닙니다.</b> 최종 판단은 반드시 <b>ROAS(매출÷광고비)</b>로 합니다.</p>
+  </div>
+
+  <h3>복합 지표로 본다 (한 가지만 보지 않기)</h3>
+  <div class="field">
+    <div class="field-row"><div class="k">ROAS</div><div class="v"><b>최종 판단 기준.</b> 소재·채널 생사는 이걸로</div></div>
+    <div class="field-row"><div class="k">CPM (노출 단가)</div><div class="v">오디언스 품질 신호. <b>CPM 1만 미만 = 싼(질 낮은) 오디언스 = 오더 0</b> 경향. 오더는 CPM 2만 전후에서 발생</div></div>
+    <div class="field-row"><div class="k">영상 완주율 (75% 지점)</div><div class="v">위너는 75%까지 보는 사람이 30%대. 10%대면 "끝까지 안 보고 신청" = 기대 불일치 위험</div></div>
+    <div class="field-row"><div class="k">연령 분포</div><div class="v">35~54세 비중 높을수록 좋음(학부모). 25~34 쏠리면 "싼 리드" 경고</div></div>
+    <div class="field-row"><div class="k">빈도</div><div class="v">3 넘으면 소진. 증액 판단에 사용</div></div>
+  </div>
+  <div class="box tip">
+    <span class="bt">판정 원칙 요약</span>
+    <p>CPM이 2만 이상(품질 통과)이고 → 완주율 좋고 → 연령 35~54 중심이고 → ROAS가 받쳐주면 위너. <b>단, 이 모든 걸 보고 최종 판단은 사람이</b> 합니다. 숫자가 판단을 대신하지 않습니다.</p>
+  </div>
+
+  <h3>ROAS는 두 기준을 같이 본다</h3>
+  <div class="field">
+    <div class="field-row"><div class="k">코호트 ROAS</div><div class="v">그달 광고비 ÷ 그달 유입 리드의 누적 매출 → <b>소재·채널 생사 판단</b></div></div>
+    <div class="field-row"><div class="k">결제일 ROAS</div><div class="v">그달 광고비 ÷ 그달 결제된 매출 → <b>경영 보고용</b></div></div>
+  </div>
+  <p>월 중간에 볼 때는 <strong>분모(기간)를 분자와 맞춰야</strong> 합니다. "13일치 매출을 31일치 광고비로 나누면" ROAS가 착시로 낮게 나옵니다.</p>
+  <h3>참고 화면</h3>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 메타 "분석 데이터 → 연령/성별" 분석 화면 — 연령별 노출·리드 분포 보는 곳]</span><img src="img/02_메타광고운영판단도면/008_8ffcbbaf99.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 영상 소재의 재생 유지율(완주율) 화면 — 75% 지점 유지율 보는 곳]</span><img src="img/02_메타광고운영판단도면/009_c4ba56f7c8.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<!-- 8 채리 사건 -->
+<section id="chaeri">
+  <span class="sec-num">실전 사례</span>
+  <h2 class="sec">채리 사건 — 딜리버리가 무너지면 생기는 일</h2>
+  <p class="sec-sub">앞의 개념이 실제로 어떻게 터지는지 보여주는 실화입니다.</p>
+
+  <h3>무슨 일이 있었나</h3>
+  <p>잘 돌던 채리 소재가 어느 날부터 <strong>CPM이 계단식으로 붕괴</strong>했습니다(3만 → 9천). 리드도 끊겼습니다. 처음엔 "소재가 죽었나?" 했지만 — <strong>소재는 멀쩡했습니다. 메타가 타겟을 바꾼 것</strong>이었습니다.</p>
+  <div class="box warn">
+    <span class="bt">원인 — 메타가 25~34세로 예산을 몰았다</span>
+    <p>지출은 그대로인데 노출만 3배로 늘었습니다(같은 돈으로 더 싼 노출). 연령을 보니 <b>25~34세 노출이 12배로 폭증</b>했습니다. 그들은 리드는 내지만 오더는 안 합니다. 35~54세(진짜 고객) 노출은 그대로였는데, 싼 25~34세가 전체를 덮어버린 것입니다.</p>
+  </div>
+
+  <h3>무엇을 배웠나</h3>
+  <div class="field">
+    <div class="field-row"><div class="k">① 소재 죽음 ≠ 딜리버리 문제</div><div class="v">CPM·연령을 봐야 "소재가 죽은 건지, 타겟이 틀어진 건지" 구분됨</div></div>
+    <div class="field-row"><div class="k">② 25세 천장의 한계</div><div class="v">어드밴티지+로는 25~34를 못 막음. 막으려면 어드밴티지+ 꺼야(러닝 리셋)</div></div>
+    <div class="field-row"><div class="k">③ 삭감은 독</div><div class="v">CPM 올랐다고 삭감 → 더 싼 노출로 가서 CPM 더 하락</div></div>
+    <div class="field-row"><div class="k">④ 근본 해결 = CAPI</div><div class="v">메타가 오더를 알면 25~34를 알아서 버림. 그래서 CAPI가 답</div></div>
+  </div>
+  <div class="box tip">
+    <span class="bt">이 사건이 주는 교훈</span>
+    <p>숫자 하나(리드 끊김)만 보고 "소재 교체"로 달려가지 마세요. <b>CPM·연령·완주율을 함께</b> 보면 진짜 원인(딜리버리)이 보입니다. 그리고 <b>하루치로 단정하지 마세요</b> — 채리도 3일 붕괴 후 반등했습니다.</p>
+  </div>
+  <div class="shot filled" data-shot=""><input type="file" accept="image/*"><span class="hint"></span><span class="desc">[스샷: 채리 사건 당시 CPM 하락 그래프 또는 연령 분포 변화 — 그로스 로그/보고서에서 캡처]</span><img src="img/02_메타광고운영판단도면/010_f03f890e56.png"><div class="imgtools"><button data-replace="">다른 그림으로</button><button data-remove="">지우기</button></div></div>
+</section>
+
+<footer>
+  아라온 그로스 설계 아카이브 · 도면 02 (메타 광고 운영·판단)<br>
+  대외비 · 무단 외부 공유 금지 · 최종수정 2026-11-16<br>
+  ※ 이 문서의 수치·사례는 2026년 상반기 운영 기록 기반입니다. 메타 정책·화면은 바뀔 수 있으니 원리 위주로 적용하세요.
+</footer>
+
+</div>
+<a href="#" class="totop" aria-label="맨 위로">↑</a>
+<script>
+(function(){
+  function fill(shot,u){var o=shot.querySelector('img');if(o)o.remove();var img=document.createElement('img');img.src=u;shot.insertBefore(img,shot.querySelector('.imgtools'));shot.classList.add('filled');}
+  function hf(shot,file){if(!file||!file.type.startsWith('image/'))return;var r=new FileReader();r.onload=function(e){fill(shot,e.target.result);};r.readAsDataURL(file);}
+  var last=null;
+  document.querySelectorAll('[data-shot]').forEach(function(shot){
+    var inp=shot.querySelector('input[type=file]');
+    shot.addEventListener('click',function(e){if(e.target.closest('.imgtools'))return;last=shot;inp.click();});
+    inp.addEventListener('change',function(){if(inp.files[0])hf(shot,inp.files[0]);inp.value='';});
+    shot.addEventListener('dragover',function(e){e.preventDefault();shot.classList.add('dragover');});
+    shot.addEventListener('dragleave',function(){shot.classList.remove('dragover');});
+    shot.addEventListener('drop',function(e){e.preventDefault();shot.classList.remove('dragover');var f=e.dataTransfer.files[0];if(f)hf(shot,f);});
+    var rep=shot.querySelector('[data-replace]'),rem=shot.querySelector('[data-remove]');
+    if(rep)rep.addEventListener('click',function(e){e.stopPropagation();last=shot;inp.click();});
+    if(rem)rem.addEventListener('click',function(e){e.stopPropagation();var i=shot.querySelector('img');if(i)i.remove();shot.classList.remove('filled');});
+  });
+  document.addEventListener('paste',function(e){if(!last)return;var it=e.clipboardData.items;for(var i=0;i<it.length;i++){if(it[i].type.startsWith('image/')){hf(last,it[i].getAsFile());e.preventDefault();break;}}});
+  window.saveDoc=function(){var h='<!DOCTYPE html>\n'+document.documentElement.outerHTML;var b=new Blob([h],{type:'text/html;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='02_메타광고운영판단도면.html';a.click();URL.revokeObjectURL(a.href);};
+})();
+</script>
+
+
+</body></html>
