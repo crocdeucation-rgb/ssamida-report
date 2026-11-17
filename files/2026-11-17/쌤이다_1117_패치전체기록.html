@@ -1,260 +1,67 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>��������� 11/17 ������ ������ ������</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <style>body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;max-width:1180px;margin:0 auto;padding:28px 18px 60px;color:#171A14;background:#F4F5EF;line-height:1.6;word-break:keep-all}
-h1{font-size:26px;letter-spacing:-.8px;border-bottom:3px solid #171A14;padding-bottom:10px}
-h2{font-size:19px;margin-top:30px}
-table{border-collapse:collapse;background:#fff;font-size:13.5px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-th{background:#171A14;color:#fff;text-align:left;padding:8px 10px;white-space:nowrap}
-td{border-top:1px solid #E8EAE3;padding:8px 10px;vertical-align:top;min-width:90px}
-td:first-child,td:nth-child(2){white-space:nowrap;font-weight:700}
-code{background:#EFF1E9;border-radius:4px;padding:0 4px;font-size:12.5px}
-</style>
-<!--ssr-mobile--><meta name="robots" content="noindex,nofollow,noarchive"><style>@media(max-width:900px){html{-webkit-text-size-adjust:100%}
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><title>쌤이다 11/17 패치 전체 기록</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#171A14;--ink2:#4E5968;--ink3:#656D76;--line:#E8EAE3;--bg:#F4F5EF;--lime:#C6F432;--ok:#6C860E;--okbg:#EEF6D6;--red:#B8453C;--redbg:#FBEEEC;--amb:#A1620B;--ambbg:#FDF4E2;--blu:#2F64D6;--blubg:#EAF0FC}
+*{box-sizing:border-box;margin:0;padding:0}html{-webkit-text-size-adjust:100%}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;word-break:keep-all;font-size:15px}
+.in{max-width:1080px;margin:0 auto;padding:0 22px}
+.hd{background:var(--ink);color:#fff;padding:34px 0 30px}
+.back{color:#9ea395;font-size:13px;text-decoration:none}.back:hover{color:#fff}
+.kick{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--lime);margin-top:14px}
+.hd h1{font-size:32px;font-weight:800;letter-spacing:-1.2px;margin-top:6px}
+.hd p{color:#AEB4A8;font-size:14px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.kpi{background:#22261f;border:1px solid #33382f;border-radius:12px;padding:12px 16px}
+.kpi span{font-size:12px;color:#9ea395}.kpi b{display:block;font-size:26px;font-weight:800;letter-spacing:-.8px}
+.kpi b small{font-size:14px;color:#7c8274;font-weight:600}.kpi.l b{color:var(--lime)}
+main{padding:8px 0 60px}
+.grp{margin-top:30px}
+.gh{display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:12px}
+.gn{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--lime);font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.gh h3{font-size:19px;font-weight:800;letter-spacing:-.5px}.gh p{font-size:13px;color:var(--ink3)}
+.gh em{margin-left:auto;font-style:normal;font-size:13px;font-weight:700;color:var(--ink3)}
+.card{background:#fff;border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:14px;padding:16px 20px;margin-bottom:10px}
+.card.s-back{border-left-color:var(--red)}.card.s-stop{border-left-color:var(--amb)}.card.s-in{border-left-color:#B9BDB2}
+.ch{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.code{font-family:Consolas,Menlo,monospace;font-weight:800;font-size:13.5px;background:var(--ink);color:var(--lime);border-radius:6px;padding:2px 9px;white-space:nowrap}
+.st{font-size:12px;font-weight:800;border-radius:6px;padding:2px 8px;background:var(--okbg);color:var(--ok)}
+.s-back .st{background:var(--redbg);color:var(--red)}.s-stop .st{background:var(--ambbg);color:var(--amb)}.s-in .st{background:#EFF1E9;color:var(--ink3)}
+.pc{display:grid;grid-template-columns:1fr 1.25fr;gap:22px}
+h5{font-size:11.5px;font-weight:800;color:var(--ink3);letter-spacing:.5px;margin-bottom:4px}
+.pc>div:last-child h5{color:var(--ok)}
+ul{list-style:none}
+li{position:relative;padding-left:13px;font-size:14px;color:var(--ink2);margin:3px 0;line-height:1.55}
+li:before{content:'';position:absolute;left:1px;top:9px;width:5px;height:5px;border-radius:50%;background:#B9BDB2}
+.pc>div:last-child li:before{background:var(--ok)}
+.m{color:#B9BDB2;font-size:13px}
+.files{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+code{font-family:Consolas,Menlo,monospace;font-size:11.5px;background:#EFF1E9;color:var(--ink2);border-radius:5px;padding:1px 6px;word-break:break-all}
+.next{margin-top:34px;background:var(--ink);color:#fff;border-radius:16px;padding:20px 22px}
+.nh{display:flex;align-items:center;gap:10px;margin-bottom:12px}.nh b{font-size:18px}
+.nm{font-size:12px;color:#9ea395}
+.next .code{background:var(--lime);color:var(--ink)}
+.next h5{color:#9ea395}.next .pc>div:last-child h5{color:var(--lime)}
+.next li{color:#D6DACF}.next .pc>div:last-child li:before{background:var(--lime)}
+.next .files{border-top-color:#3a3f35}.next code{background:#2b2f27;color:#C9CEC2}
+.diag{margin-top:34px}
+.diag ul{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.diag li{display:flex;align-items:center;gap:12px;padding:11px 16px;margin:0;border-top:1px solid #f0f1ec}
+.diag li:first-child{border-top:0}.diag li:before{display:none}
+.diag .dt{flex:1;color:var(--ink2)}.diag .to{font-size:12.5px;font-weight:800;color:var(--ok);white-space:nowrap}
+.diag h3{font-size:19px;font-weight:800;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:12px}
+.diag h3 small{font-size:13px;color:var(--ink3);font-weight:600}
+.ft{text-align:center;color:var(--ink3);font-size:12px;padding:30px 0}
+@media(max-width:760px){.pc{grid-template-columns:1fr;gap:10px}.kpis{grid-template-columns:repeat(2,1fr)}.hd h1{font-size:25px}.in{padding:0 14px}.card{padding:14px 15px}.diag li{flex-wrap:wrap;gap:4px 10px}.diag .dt{flex-basis:100%;order:3}}
+</style><!--ssr-mobile--><style>@media(max-width:900px){html{-webkit-text-size-adjust:100%}
 img,video,svg{max-width:100%;height:auto}
 table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
-pre,code{white-space:pre-wrap;word-break:break-all}}</style></head>
-<body>
-
-<h1 id="쌤이다-11월-17일-패치-전체-기록">쌤이다 11월 17일 패치 전체
-기록</h1>
-<p>검증 스크립트 <code>verify_all_20261117b.ps1</code> 기준 233/234 일치
-(남은 1건 teacher/availability.asp 는 dx가 버전 번호를 바꾼 것, 목록
-갱신본에서 제외됨).</p>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-<col style="width: 20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>패치</th>
-<th>상태</th>
-<th>문제</th>
-<th>바꾼 것</th>
-<th>주요 파일</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>di → di2</td>
-<td>적용</td>
-<td>di가 로컬(dd 상태)과 서버가 달라 중단</td>
-<td>CSS·서비스워커 교체, 워크스페이스 CSS 버전만 부분 수정. 서비스워커
-알림 renotify 켜서 새 알림마다 기기 알림음</td>
-<td>room-034/workspace.css, ssamida-sw.js,
-class·teacher/workspace.asp</td>
-</tr>
-<tr class="even">
-<td>dj</td>
-<td>적용 68/68</td>
-<td>쌤 가능시간 목록/표 이중 화면, 복사 아이콘이 스크린샷처럼 보임, 쌤
-프로필 경력·자격 입력 중복, 정기결제 관리 버튼이 테스트 페이지로, 학부모
-결제정보 TRD 미적용, 브리지가 시간 제한으로 꺼짐</td>
-<td>가능시간 단일 화면·「복사」 글자·드래그(pointermove), 쌤 프로필
-재설계·중복 제거, 프로필 꾸미기→쌤은 프로필 화면으로, 학생 카드에 알림톡
-카드·활동 로그 통합·결제 바로가기, billing_info TRD, 결제 주문→학생 카드
-결제 위치로, 워커에 「수업방 미개설」「성장 리포트 제출」 알림, 브리지
-예약작업 Python312·무제한·재시작 3회</td>
-<td>teacher/availability.asp, teacher/profile.asp, student_card.asp,
-payment/billing_info.asp, worker.py</td>
-</tr>
-<tr class="odd">
-<td>dk</td>
-<td>62/63 중단</td>
-<td>어드민 강사정보 수정 화면 재설계 요청 미반영, 결제 상태·관리 화면에
-테스트 링크·잘못된 MID</td>
-<td>강사 수정 폼 4구역(기본 정보 / 학부모에게 보여요 / 운영진만 봐요 /
-수업 설정)+고정 저장바, 가능시간 표↔︎목록 동기화·요일 복사·24:00 처리,
-billing_status LIVE 약정 표, billing_manage 테스트 링크 제거, 고객 CSS
-55개 TRD 토큰화</td>
-<td>teachers.asp, teacher_availability_list.js, billing_status.asp,
-billing_manage.asp</td>
-</tr>
-<tr class="even">
-<td>dk2</td>
-<td>적용</td>
-<td>admin/araonpick teachers.asp가 서로 달라 dk 불일치</td>
-<td>두 경로 같은 내용으로</td>
-<td>teachers.asp ×2</td>
-</tr>
-<tr class="odd">
-<td>dl</td>
-<td>적용</td>
-<td>12:32부터 웹푸시 전부 멈춤(DATAERROR) — 버전값 64자가 varchar(60)
-초과</td>
-<td>저장·비교 모두 60자로 자름</td>
-<td>staff/ssamida_web_push/billing_operation_events.py</td>
-</tr>
-<tr class="even">
-<td>dm</td>
-<td>적용</td>
-<td>리드에서 24번 알림톡 직접 발송 불가, 버튼 문구 혼동</td>
-<td>리드 보드 24번 직접 발송, 「온보딩 카드 →」</td>
-<td>lead_board.asp</td>
-</tr>
-<tr class="odd">
-<td>dn</td>
-<td>적용</td>
-<td>dk 토큰화가 first_checkout.css의 색 정의를 자기 참조로 바꿔 결제
-화면 색 깨짐</td>
-<td>정의 12개 복구, 어드민 CSS 55개 TRD 토큰화</td>
-<td>payment/first_checkout.css, 어드민 CSS 55개</td>
-</tr>
-<tr class="even">
-<td>(재부팅)</td>
-<td>완료</td>
-<td>—</td>
-<td>재부팅 후 검증 239/239, 브리지 부팅 시 자동 실행 확인</td>
-<td>—</td>
-</tr>
-<tr class="odd">
-<td>do</td>
-<td>적용</td>
-<td>리드→온보딩으로 넘길 때 정보를 다시 입력해야 함</td>
-<td>온보딩 등록 화면이 리드 번호를 받아
-학생·학부모·번호·학년·유입경로·메모 자동 채움, 「리드에서 넘어왔어요」
-배너, 리드 보드 「온보딩으로 넘기기 →」</td>
-<td>free_class_new.asp, free-register.js, lead_board.asp</td>
-</tr>
-<tr class="even">
-<td>dp</td>
-<td>적용</td>
-<td>리드가 전화번호만으로 다른 회원(테스트 계정)에 매칭돼 「회원
-카드」로 감</td>
-<td>번호+학생 이름이 같을 때만 매칭, 번호만 같으면 「같은 번호 회원」
-힌트</td>
-<td>lead_board.asp</td>
-</tr>
-<tr class="odd">
-<td>dq</td>
-<td>적용</td>
-<td>리드 줄 버튼 배치 과다</td>
-<td>다음 할 일 버튼 1개+작은 링크, 모바일 카드형</td>
-<td>lead_board.asp</td>
-</tr>
-<tr class="even">
-<td>dr</td>
-<td>적용</td>
-<td>온보딩 「무료수업 겹침」 오류 — 크롬 자동완성이 학생 이름을 바꿔
-넣어 이미 만든 수업과 충돌</td>
-<td>온보딩 폼 자동완성 차단</td>
-<td>free-register.js</td>
-</tr>
-<tr class="odd">
-<td>ds</td>
-<td>적용 2/2</td>
-<td>학생 이름 없는 리드가 넘긴 무료수업과 연결 안 됨</td>
-<td>운영 메모의 「리드 #번호」로도 연결</td>
-<td>lead_board.asp ×2</td>
-</tr>
-<tr class="even">
-<td>dt</td>
-<td>dx에 포함</td>
-<td>매칭에서 쌤 시간표가 가능시간 표시만 됨</td>
-<td>강사 카드 API에 이번 주·다음 주 수업, 주간 캘린더(가능 시간 +
-정규·무료 수업 + 쉬는 날)</td>
-<td>teacher_card_api.asp, common/js/teacher-card.js</td>
-</tr>
-<tr class="odd">
-<td>du</td>
-<td>적용</td>
-<td>어드민 리포트 검수 화면에 최소·최대 글자 수 남아 있음</td>
-<td>최소 없음(빈칸만 불가), 최대 3000자, 저장 처리도 동일</td>
-<td>free_trial_report_review(.asp/_proc.asp) ×2</td>
-</tr>
-<tr class="even">
-<td>dv</td>
-<td>되돌림</td>
-<td>알림 안내 페이지 링크 복사 안 됨</td>
-<td>CSP nonce 방식 → 알림톡 링크 페이지 500 발생 → 롤백</td>
-<td>notify/open.asp</td>
-</tr>
-<tr class="odd">
-<td>dw</td>
-<td>적용 19/19, 서버 열기 검사 통과</td>
-<td>첫 결제 확정 약 70초(승인은 1초, 재조회 60초 고정 대기), 링크 복사,
-스터디룸 캘린더, 동명이인 혼동, 이력 문구 「발송하지 않음」이 실제와
-다름, 쌤 리포트 글자 수</td>
-<td>승인 응답 받은 건 2초 뒤 재조회, 결제 화면 상태 확인 2초, 복사
-스크립트 외부 파일+CSP self, 스터디룸 주간·일간 캘린더, 학생 카드
-과목·무료수업 번호 표시와 다시 보내기 확인창 과목, 이력 문구 수정, 쌤
-리포트 최대 3000자. 이번부터 적용 후 서버에서 페이지 직접 열어 500이면
-자동 롤백</td>
-<td>billing_runtime.py, first_checkout.js, notify/open.asp·open-copy.js,
-workspace.js·css, student_card.asp, free_regular_core.asp,
-teacher/free_trial_report(_proc).asp</td>
-</tr>
-<tr class="even">
-<td>dx</td>
-<td>적용</td>
-<td>가능시간 드래그가 지나간 칸만 칠해짐, 커서가 십자(스크린샷 모양),
-강사 상세 표/글 토글, 티칭룸 캘린더에 가능시간 없음, 학부모용 강사
-프로필 지도 범위가 전 과목, 「수업 일시 ~」 빈칸</td>
-<td>사각형 드래그·손가락 커서, 강사 상세 주간 시간표, 티칭룸
-주간·일간(가능 시간 배경+정규·무료 블록), 지도 범위 학생 과목만,
-datetime2 소수 7자리 날짜 인식 수정</td>
-<td>availability_drag.js, teacher_detail.asp, teacher-card.js,
-workspace.js·css, room_workspace.asp, teacher_public_profile.asp</td>
-</tr>
-<tr class="odd">
-<td>dy</td>
-<td>dz에 합침</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-</tr>
-<tr class="even">
-<td>dz</td>
-<td><strong>미적용 (내일)</strong></td>
-<td>정규 전환 시간이 겹쳐도 골라지고 저장만 거절됨, 상단 메뉴 회색 박스,
-앱 설치 버튼 숨김, 운영 확정 일정이 목록, 학부모에게 1~N회 일정 없음, 새
-알림 팝업 없음</td>
-<td>기존 수업 「수업 있음」 차단·줄마다 가능/겹침·거절 사유 크게, 서버
-가능시간 검사를 가능시간 표 기준으로, 메뉴 hover 배경 제거, 종 옆 「앱
-설치」, 매니페스트 TRD 색, 확정 미리보기 달력, 이용법 화면에 확정
-일정+24시간 규칙·「스터디룸 로그인」 버튼 복구, 새 알림 팝업
-카드+띵동+다른 탭이면 기기 알림, 확인 주기 20초, 점검 조회 스크립트</td>
-<td>free-regular.js, free_regular_core.asp, brand-lime-portal css,
-push-client.js, room-inbox.js, ssamida-manifest.json,
-notify/open.asp</td>
-</tr>
-</tbody>
-</table>
-<h2 id="조회읽기-전용-진단">조회(읽기 전용) 진단</h2>
-<ul>
-<li>d1·d2: 푸시 DATAERROR 원인 확인 (→ dl)</li>
-<li>d3: 온보딩 겹침 원인 — 193번이 이미 19:43에 생성돼 있었음 (→
-dr)</li>
-<li>d4·d5: 영어 결제창 — 링크가 191(고2 영어) 건, 193(고1 수학)은 정상
-진행 확인</li>
-<li>d6: 첫 결제 구간별 시간 — 승인 0.7초, 확정 68초 뒤 (→ dw)</li>
-<li>d7·d8(diag_learning): 푸시 구독·전송, 숙제·질문 흐름 — 결과
-대기</li>
-</ul>
-</body>
-</html>
+pre,code{white-space:pre-wrap;word-break:break-all}}</style></head><body>
+<header class="hd"><div class="in"><a class="back" href="../../reports/2026-11-17.html#shin-sangjun">← 11/17 보고</a>
+<div class="kick">쌤이다 · 패치 기록</div><h1>11월 17일 패치 전체 기록</h1>
+<p>서버 검증 233/234 일치 — 남은 1건(teacher/availability.asp)은 dx가 버전 번호만 바꾼 파일이라 실제 미적용 아님</p>
+<div class="kpis"><div class="kpi l"><span>재부팅 후 검증</span><b>239<small>/239</small></b></div><div class="kpi"><span>되돌림</span><b>1<small>건 · dv</small></b></div><div class="kpi"><span>내일 적용</span><b>1<small>건 · dz</small></b></div><div class="kpi"><span>검증 일치</span><b>233<small>/234</small></b></div></div>
+</div></header>
+<main class="in"><section class="grp"><div class="gh"><span class="gn">1</span><div><h3>오전 ~ 오후</h3><p>화면 정리 · 강사 정보 · 결제 화면</p></div><em>7건</em></div><article class="card s-ok"><div class="ch"><span class="code">di → di2</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>di가 로컬(dd 상태)과 서버가 달라 중단</li></ul></div><div><h5>바꾼 것</h5><ul><li>CSS·서비스워커 교체</li><li>워크스페이스 CSS 버전만 부분 수정. 서비스워커 알림 renotify 켜서 새 알림마다 기기 알림음</li></ul></div></div><div class="files"><code>room-034/workspace.css</code><code>ssamida-sw.js</code><code>class·teacher/workspace.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dj</span><span class="st">적용 68/68</span></div><div class="pc"><div><h5>문제</h5><ul><li>쌤 가능시간 목록/표 이중 화면</li><li>복사 아이콘이 스크린샷처럼 보임</li><li>쌤 프로필 경력·자격 입력 중복</li><li>정기결제 관리 버튼이 테스트 페이지로</li><li>학부모 결제정보 TRD 미적용</li><li>브리지가 시간 제한으로 꺼짐</li></ul></div><div><h5>바꾼 것</h5><ul><li>가능시간 단일 화면·「복사」 글자·드래그(pointermove)</li><li>쌤 프로필 재설계·중복 제거</li><li>프로필 꾸미기→쌤은 프로필 화면으로</li><li>학생 카드에 알림톡 카드·활동 로그 통합·결제 바로가기</li><li>billing_info TRD</li><li>결제 주문→학생 카드 결제 위치로</li><li>워커에 「수업방 미개설」「성장 리포트 제출」 알림</li><li>브리지 예약작업 Python312·무제한·재시작 3회</li></ul></div></div><div class="files"><code>teacher/availability.asp</code><code>teacher/profile.asp</code><code>student_card.asp</code><code>payment/billing_info.asp</code><code>worker.py</code></div></article><article class="card s-stop"><div class="ch"><span class="code">dk</span><span class="st">중단 → dk2</span></div><div class="pc"><div><h5>문제</h5><ul><li>어드민 강사정보 수정 화면 재설계 요청 미반영</li><li>결제 상태·관리 화면에 테스트 링크·잘못된 MID</li></ul></div><div><h5>바꾼 것</h5><ul><li>강사 수정 폼 4구역(기본 정보 / 학부모에게 보여요 / 운영진만 봐요 / 수업 설정)+고정 저장바</li><li>가능시간 표↔목록 동기화·요일 복사·24:00 처리</li><li>billing_status LIVE 약정 표</li><li>billing_manage 테스트 링크 제거</li><li>고객 CSS 55개 TRD 토큰화</li></ul></div></div><div class="files"><code>teachers.asp</code><code>teacher_availability_list.js</code><code>billing_status.asp</code><code>billing_manage.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dk2</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>admin/araonpick teachers.asp가 서로 달라 dk 불일치</li></ul></div><div><h5>바꾼 것</h5><ul><li>두 경로 같은 내용으로</li></ul></div></div><div class="files"><code>teachers.asp ×2</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dl</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>12:32부터 웹푸시 전부 멈춤(DATAERROR) — 버전값 64자가 varchar(60) 초과</li></ul></div><div><h5>바꾼 것</h5><ul><li>저장·비교 모두 60자로 자름</li></ul></div></div><div class="files"><code>staff/ssamida_web_push/billing_operation_events.py</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dn</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>dk 토큰화가 first_checkout.css의 색 정의를 자기 참조로 바꿔 결제 화면 색 깨짐</li></ul></div><div><h5>바꾼 것</h5><ul><li>정의 12개 복구</li><li>어드민 CSS 55개 TRD 토큰화</li></ul></div></div><div class="files"><code>payment/first_checkout.css</code><code>어드민 CSS 55개</code></div></article><article class="card s-ok"><div class="ch"><span class="code">재부팅</span><span class="st">완료</span></div><div class="pc"><div><h5>문제</h5><p class=m>—</p></div><div><h5>바꾼 것</h5><ul><li>재부팅 후 검증 239/239</li><li>브리지 부팅 시 자동 실행 확인</li></ul></div></div></article></section><section class="grp"><div class="gh"><span class="gn">2</span><div><h3>저녁</h3><p>리드 → 온보딩</p></div><em>6건</em></div><article class="card s-ok"><div class="ch"><span class="code">dm</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>리드에서 24번 알림톡 직접 발송 불가</li><li>버튼 문구 혼동</li></ul></div><div><h5>바꾼 것</h5><ul><li>리드 보드 24번 직접 발송</li><li>「온보딩 카드 →」</li></ul></div></div><div class="files"><code>lead_board.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">do</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>리드→온보딩으로 넘길 때 정보를 다시 입력해야 함</li></ul></div><div><h5>바꾼 것</h5><ul><li>온보딩 등록 화면이 리드 번호를 받아 학생·학부모·번호·학년·유입경로·메모 자동 채움</li><li>「리드에서 넘어왔어요」 배너</li><li>리드 보드 「온보딩으로 넘기기 →」</li></ul></div></div><div class="files"><code>free_class_new.asp</code><code>free-register.js</code><code>lead_board.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dp</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>리드가 전화번호만으로 다른 회원(테스트 계정)에 매칭돼 「회원 카드」로 감</li></ul></div><div><h5>바꾼 것</h5><ul><li>번호+학생 이름이 같을 때만 매칭</li><li>번호만 같으면 「같은 번호 회원」 힌트</li></ul></div></div><div class="files"><code>lead_board.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dq</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>리드 줄 버튼 배치 과다</li></ul></div><div><h5>바꾼 것</h5><ul><li>다음 할 일 버튼 1개+작은 링크</li><li>모바일 카드형</li></ul></div></div><div class="files"><code>lead_board.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dr</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>온보딩 「무료수업 겹침」 오류 — 크롬 자동완성이 학생 이름을 바꿔 넣어 이미 만든 수업과 충돌</li></ul></div><div><h5>바꾼 것</h5><ul><li>온보딩 폼 자동완성 차단</li></ul></div></div><div class="files"><code>free-register.js</code></div></article><article class="card s-ok"><div class="ch"><span class="code">ds</span><span class="st">적용 2/2</span></div><div class="pc"><div><h5>문제</h5><ul><li>학생 이름 없는 리드가 넘긴 무료수업과 연결 안 됨</li></ul></div><div><h5>바꾼 것</h5><ul><li>운영 메모의 「리드 #번호」로도 연결</li></ul></div></div><div class="files"><code>lead_board.asp ×2</code></div></article></section><section class="grp"><div class="gh"><span class="gn">3</span><div><h3>밤</h3><p>글자 수 · 결제 속도 · 캘린더</p></div><em>6건</em></div><article class="card s-ok"><div class="ch"><span class="code">du</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>어드민 리포트 검수 화면에 최소·최대 글자 수 남아 있음</li></ul></div><div><h5>바꾼 것</h5><ul><li>최소 없음(빈칸만 불가)</li><li>최대 3000자</li><li>저장 처리도 동일</li></ul></div></div><div class="files"><code>free_trial_report_review(.asp/_proc.asp) ×2</code></div></article><article class="card s-back"><div class="ch"><span class="code">dv</span><span class="st">되돌림</span></div><div class="pc"><div><h5>문제</h5><ul><li>알림 안내 페이지 링크 복사 안 됨</li></ul></div><div><h5>바꾼 것</h5><ul><li>CSP nonce 방식 → 알림톡 링크 페이지 500 발생 → 롤백</li></ul></div></div><div class="files"><code>notify/open.asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dw</span><span class="st">적용 19/19</span></div><div class="pc"><div><h5>문제</h5><ul><li>첫 결제 확정 약 70초(승인은 1초, 재조회 60초 고정 대기)</li><li>링크 복사</li><li>스터디룸 캘린더</li><li>동명이인 혼동</li><li>이력 문구 「발송하지 않음」이 실제와 다름</li><li>쌤 리포트 글자 수</li></ul></div><div><h5>바꾼 것</h5><ul><li>승인 응답 받은 건 2초 뒤 재조회</li><li>결제 화면 상태 확인 2초</li><li>복사 스크립트 외부 파일+CSP self</li><li>스터디룸 주간·일간 캘린더</li><li>학생 카드 과목·무료수업 번호 표시와 다시 보내기 확인창 과목</li><li>이력 문구 수정</li><li>쌤 리포트 최대 3000자. 이번부터 적용 후 서버에서 페이지 직접 열어 500이면 자동 롤백</li></ul></div></div><div class="files"><code>billing_runtime.py</code><code>first_checkout.js</code><code>notify/open.asp·open-copy.js</code><code>workspace.js·css</code><code>student_card.asp</code><code>free_regular_core.asp</code><code>teacher/free_trial_report(_proc).asp</code></div></article><article class="card s-ok"><div class="ch"><span class="code">dx</span><span class="st">적용</span></div><div class="pc"><div><h5>문제</h5><ul><li>가능시간 드래그가 지나간 칸만 칠해짐</li><li>커서가 십자(스크린샷 모양)</li><li>강사 상세 표/글 토글</li><li>티칭룸 캘린더에 가능시간 없음</li><li>학부모용 강사 프로필 지도 범위가 전 과목</li><li>「수업 일시 ~」 빈칸</li></ul></div><div><h5>바꾼 것</h5><ul><li>사각형 드래그·손가락 커서</li><li>강사 상세 주간 시간표</li><li>티칭룸 주간·일간(가능 시간 배경+정규·무료 블록)</li><li>지도 범위 학생 과목만</li><li>datetime2 소수 7자리 날짜 인식 수정</li></ul></div></div><div class="files"><code>availability_drag.js</code><code>teacher_detail.asp</code><code>teacher-card.js</code><code>workspace.js·css</code><code>room_workspace.asp</code><code>teacher_public_profile.asp</code></div></article><article class="card s-in"><div class="ch"><span class="code">dt</span><span class="st">dx에 포함</span></div><div class="pc"><div><h5>문제</h5><ul><li>매칭에서 쌤 시간표가 가능시간 표시만 됨</li></ul></div><div><h5>바꾼 것</h5><ul><li>강사 카드 API에 이번 주·다음 주 수업</li><li>주간 캘린더(가능 시간 + 정규·무료 수업 + 쉬는 날)</li></ul></div></div><div class="files"><code>teacher_card_api.asp</code><code>common/js/teacher-card.js</code></div></article><article class="card s-in"><div class="ch"><span class="code">dy</span><span class="st">dz에 합침</span></div></article></section><section class="next"><div class="nh"><span class="code">dz</span><b>내일 적용</b><span class="nm">dy 포함</span></div><div class="pc"><div><h5>지금 문제</h5><ul><li>정규 전환 시간이 겹쳐도 골라지고 저장만 거절됨</li><li>상단 메뉴 회색 박스</li><li>앱 설치 버튼 숨김</li><li>운영 확정 일정이 목록</li><li>학부모에게 1~N회 일정 없음</li><li>새 알림 팝업 없음</li></ul></div><div><h5>바꿀 것</h5><ul><li>기존 수업 「수업 있음」 차단·줄마다 가능/겹침·거절 사유 크게</li><li>서버 가능시간 검사를 가능시간 표 기준으로</li><li>메뉴 hover 배경 제거</li><li>종 옆 「앱 설치」</li><li>매니페스트 TRD 색</li><li>확정 미리보기 달력</li><li>이용법 화면에 확정 일정+24시간 규칙·「스터디룸 로그인」 버튼 복구</li><li>새 알림 팝업 카드+띵동+다른 탭이면 기기 알림</li><li>확인 주기 20초</li><li>점검 조회 스크립트</li></ul></div></div><div class="files"><code>free-regular.js</code><code>free_regular_core.asp</code><code>brand-lime-portal css</code><code>push-client.js</code><code>room-inbox.js</code><code>ssamida-manifest.json</code><code>notify/open.asp</code></div></section>
+<section class="diag"><h3>원인 확인용 조회 <small>읽기만 함</small></h3><ul><li><span class="code">d1 · d2</span><span class="dt">푸시 멈춤 원인 확인</span><span class="to">→ dl</span></li><li><span class="code">d3</span><span class="dt">온보딩 겹침 — 193번이 이미 19:43에 생성돼 있었음</span><span class="to">→ dr</span></li><li><span class="code">d4 · d5</span><span class="dt">영어 결제창 — 링크가 191(고2 영어) 건, 193(고1 수학)은 정상</span><span class="to">—</span></li><li><span class="code">d6</span><span class="dt">첫 결제 구간별 시간 — 승인 0.7초, 확정 68초 뒤</span><span class="to">→ dw</span></li><li><span class="code">d7 · d8</span><span class="dt">푸시 구독·전송, 숙제·질문 흐름</span><span class="to">결과 대기</span></li></ul></section>
+</main><footer class="ft">쌤이다 총괄보고 · 내부용</footer></body></html>
