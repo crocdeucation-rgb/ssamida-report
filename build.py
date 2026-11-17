@@ -194,5 +194,6 @@ for f in glob.glob(os.path.join(ROOT, "files", "*", "*.html")):
     t = open(f, encoding="utf-8").read()
     if MOBILE_TAG in t: continue
     css = GENERIC + (DECK if 'id="canvas"' in t else "")
+    if 'name="robots"' not in t: css = '<meta name="robots" content="noindex,nofollow,noarchive">' + css
     t = t.replace("</head>", MOBILE_TAG + css + "</head>", 1)
     open(f, "w", encoding="utf-8").write(t)

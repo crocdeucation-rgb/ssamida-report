@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>쌤이다 수강 등록 운영 설명서 — 무료수업 경로 · 방문 경로</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#F4F5EF;--card:#fff;--ink:#171A14;--ink2:#4E5968;--ink3:#656D76;--line:#E8EAE3;--press:#EFF1E9;
+  --lime:#C6F432;--ok:#6C860E;--warn:#B8453C;--warnbg:#FBEEEC;
+  --ops:#171A14;--tch:#2F64D6;--tchbg:#EAF0FC;--par:#C2571A;--parbg:#FCEFE6;--auto:#C6F432;
+  --kakao:#FEE500;--kbg:#ABC1D1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;word-break:keep-all;font-size:15.5px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+b,strong{font-weight:700}
+
+/* ---------- cover ---------- */
+.cover{background:var(--ink);color:#fff;padding:52px 0 40px}
+.cover .kick{font-size:12px;font-weight:800;letter-spacing:2.4px;color:var(--lime)}
+.cover h1{font-size:40px;font-weight:800;letter-spacing:-1.6px;line-height:1.2;margin-top:12px}
+.cover h1 em{font-style:normal;color:var(--lime)}
+.cover p{color:#AEB4A8;margin-top:12px;max-width:760px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.toc a{text-decoration:none;font-size:13.5px;font-weight:700;border:1px solid #3a3f35;border-radius:20px;padding:6px 14px;color:#E6E9DF}
+.toc a:hover{border-color:var(--lime);color:var(--lime)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px;font-size:13px;color:#C9CEC2}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+/* ---------- actor chips ---------- */
+.who{font-style:normal;display:inline-flex;align-items:center;font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;white-space:nowrap;line-height:1.5}
+.w-ops{background:var(--ops);color:var(--lime)}
+.w-tch{background:var(--tchbg);color:var(--tch)}
+.w-par{background:var(--parbg);color:var(--par)}
+.w-auto{background:var(--auto);color:var(--ink)}
+.cover .w-tch{background:#24345a;color:#a9c3ff}.cover .w-par{background:#4a2c18;color:#ffc59c}.cover .w-ops{background:#2b2f27;outline:1px solid #555}
+
+/* ---------- sections ---------- */
+section.part{padding:54px 0 10px}
+.ph{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:12px;margin-bottom:22px}
+.ph .no{font-size:13px;font-weight:800;background:var(--ink);color:var(--lime);border-radius:6px;padding:2px 9px}
+.ph h2{font-size:28px;font-weight:800;letter-spacing:-1px}
+.ph p{color:var(--ink3);font-size:14px;width:100%}
+.lead{font-size:16px;color:var(--ink2);margin-bottom:18px;max-width:880px}
+
+/* ---------- flow overview ---------- */
+.flows{display:grid;gap:16px}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.flow h3{font-size:17px;font-weight:800;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flow h3 small{font-size:13px;color:var(--ink3);font-weight:600}
+.chain{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px;margin-top:14px;counter-reset:s}
+.chain li{counter-increment:s;display:flex;flex-direction:column;gap:5px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:9px 11px;min-width:118px;flex:1 1 118px;position:relative}
+.chain li:before{content:counter(s);position:absolute;top:8px;right:10px;font-size:11px;font-weight:800;color:#B9BDB2}
+.chain li b{font-size:14px;line-height:1.35}
+.chain li i{font-style:normal;font-size:11.5px;color:var(--ok);font-weight:700}
+.chain li.same{background:#fbfdf4;border-color:#d9e7a8}
+.chain li a{text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:5px;height:100%}
+.diff{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.box h4{font-size:15px;font-weight:800;margin-bottom:8px}
+.box ul{list-style:none}
+.box li{position:relative;padding-left:15px;font-size:14.5px;color:var(--ink2);margin:5px 0}
+.box li:before{content:'';position:absolute;left:2px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--ok)}
+
+/* ---------- step ---------- */
+.step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:30px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin:18px 0}
+.step.solo{grid-template-columns:1fr}
+.step.wide{grid-template-columns:1fr}
+.step.wide>div:first-child{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px;align-items:start}
+.step.wide>div:first-child>*{grid-column:1}
+.step.wide>div:first-child>ol.do{grid-row:4 / span 3}
+.step.wide>div:first-child>.out{grid-column:2;grid-row:4}
+.step.wide>div:first-child>.warnbox{grid-column:2;grid-row:5}
+.step.wide .mocks.row{gap:22px}
+.sh{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.sn{font-size:13px;font-weight:800;color:var(--ink3)}
+.step h3{font-size:21px;font-weight:800;letter-spacing:-.6px;line-height:1.35;margin:8px 0 6px}
+.path{font-size:12.5px;color:var(--ink3);background:var(--press);border-radius:7px;padding:3px 9px;display:inline-block;margin-bottom:10px;font-weight:600}
+.step ol.do{list-style:none;counter-reset:d;margin-top:6px}
+.step ol.do li{counter-increment:d;position:relative;padding-left:28px;margin:9px 0;font-size:15px;color:var(--ink2)}
+.step ol.do li:before{content:counter(d);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step ol.do li b{color:var(--ink)}
+.out{margin-top:14px;background:#f8fbec;border:1px solid #dfeab5;border-radius:11px;padding:11px 14px;font-size:14px}
+.out b{color:var(--ok)}
+.out .t{display:block;font-size:11.5px;font-weight:800;color:var(--ok);letter-spacing:.5px;margin-bottom:2px}
+.warnbox{margin-top:12px;background:var(--warnbg);border:1px solid #f0cfc9;border-radius:11px;padding:11px 14px;font-size:14px;color:#6d2a24}
+.warnbox .t{display:block;font-size:11.5px;font-weight:800;color:var(--warn);letter-spacing:.5px;margin-bottom:2px}
+.tip{margin-top:12px;font-size:13.5px;color:var(--ink3)}
+.mocks{display:flex;flex-direction:column;gap:14px;align-items:stretch;min-width:0}
+.mocks.row{flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:center}
+.cap{font-size:12px;color:var(--ink3);text-align:center;margin-top:6px}
+
+/* ---------- device frames ---------- */
+.desk{border:1px solid #d4d8cc;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 22px rgba(23,26,20,.07);min-width:0}
+.bar{display:flex;align-items:center;gap:6px;background:#ECEEE7;padding:7px 10px;border-bottom:1px solid #dcdfd6}
+.bar i{width:9px;height:9px;border-radius:50%;background:#cfd3c8;flex:none}
+.bar span{flex:1;min-width:0;background:#fff;border-radius:6px;font-size:11px;color:var(--ink3);padding:2px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:Consolas,Menlo,monospace}
+.phone{width:290px;max-width:100%;border:9px solid #1d201a;border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 8px 26px rgba(23,26,20,.12);flex:none}
+.phone .notch{height:20px;background:#1d201a;display:flex;justify-content:center}
+.phone .notch:after{content:'';width:70px;height:12px;background:#000;border-radius:0 0 9px 9px}
+.scr{font-size:12.5px;line-height:1.5;color:var(--ink)}
+
+/* admin mock */
+.anav{display:flex;gap:2px;background:var(--ink);padding:0 10px;overflow:hidden;white-space:nowrap}
+.anav b{color:var(--lime);font-size:12px;padding:8px 10px 8px 2px;font-weight:800}
+.anav span{color:#9ea395;font-size:11.5px;padding:8px 7px;font-weight:600}
+.anav span.on{color:#fff;box-shadow:inset 0 -3px 0 var(--lime)}
+.abody{background:var(--bg);padding:12px}
+.atitle{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.atitle h5{font-size:15px;font-weight:800}
+.btn{display:inline-flex;align-items:center;gap:4px;border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);white-space:nowrap}
+.btn.p{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.l{background:var(--lime);color:var(--ink);border-color:#b2dc28}
+.btn.g{background:#e6e8e1;color:#9aa094;border-color:#e0e3db}
+.btn.ring{outline:3px solid #ff5b3a;outline-offset:2px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:9px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.tile small{display:block;font-size:10.5px;color:var(--ink3)}
+.tile b{font-size:18px;font-weight:800}
+.tile.on{border:2px solid var(--ink)}
+.atable{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;font-size:11.5px}
+.atable th{background:#fafbf7;color:var(--ink3);font-weight:700;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);font-size:10.5px}
+.atable td{padding:8px;border-bottom:1px solid #f0f1ec;vertical-align:middle}
+.atable tr.hl td{background:#fbfde9}
+.pill{display:inline-block;font-size:10px;font-weight:800;border-radius:5px;padding:1px 6px;white-space:nowrap}
+.p-new{background:#e9f0ff;color:#2f64d6}.p-ok{background:#eef6d6;color:#56700a}.p-w{background:var(--warnbg);color:var(--warn)}.p-g{background:#eef0ea;color:var(--ink3)}.p-lime{background:var(--lime);color:var(--ink)}
+.card2{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.card2 h6{font-size:12px;font-weight:800;margin-bottom:6px}
+.kv{display:grid;grid-template-columns:78px 1fr;gap:3px 8px;font-size:11.5px}
+.kv dt{color:var(--ink3)}
+.field{border:1px solid #d9dcd2;border-radius:7px;padding:5px 8px;background:#fff;font-size:11.5px;color:var(--ink);min-height:27px}
+.field.ph{color:#a3a89c}
+.flabel{font-size:10.5px;color:var(--ink3);font-weight:700;margin:7px 0 3px}
+.chk{display:flex;gap:6px;align-items:flex-start;font-size:11px;color:var(--ink2);margin-top:6px}
+.chk:before{content:'✓';flex:none;width:14px;height:14px;border-radius:4px;background:var(--ink);color:var(--lime);font-size:9.5px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.chk.off:before{content:'';background:#fff;border:1.5px solid #c8ccc2}
+.stepper{display:flex;gap:4px;margin-bottom:9px;flex-wrap:wrap}
+.stepper span{font-size:10.5px;font-weight:700;border-radius:20px;padding:3px 9px;background:#fff;border:1px solid var(--line);color:var(--ink3)}
+.stepper span.on{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+.stepper span.done{background:#eef6d6;color:#56700a;border-color:#dbe9b0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tlist .t{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin-bottom:6px}
+.av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#dfe8c3,#b6c98a);flex:none;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#4b5d16}
+.tlist .t div{flex:1;min-width:0}
+.tlist .t b{font-size:12px}
+.tlist .t small{display:block;font-size:10.5px;color:var(--ok);font-weight:700}
+.hero{background:var(--ink);color:#fff;border-radius:10px;padding:11px 13px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.hero b{font-size:13px}.hero small{display:block;color:#a9ae9f;font-size:10.5px}
+
+/* teacher mock */
+.tnav{display:flex;align-items:center;gap:10px;background:#fff;border-bottom:1px solid var(--line);padding:8px 12px}
+.tnav b{font-size:12.5px;font-weight:800}
+.tnav b em{font-style:normal;background:var(--lime);border-radius:4px;padding:0 4px;margin-left:3px;font-size:10px}
+.tnav span{font-size:11px;color:var(--ink3)}
+
+/* phone screens */
+.pscr{background:var(--bg);min-height:430px;padding:12px}
+.pscr.white{background:#fff}
+.ptitle{font-size:11px;font-weight:800;color:var(--ok);letter-spacing:.4px}
+.pscr h6{font-size:17px;font-weight:800;line-height:1.3;letter-spacing:-.4px;margin:4px 0 10px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.pcard .tt{font-size:11.5px;font-weight:800;margin-bottom:5px}
+.bigbtn{display:block;text-align:center;background:var(--ink);color:#fff;border-radius:11px;padding:10px;font-size:12.5px;font-weight:800;margin-top:9px}
+.bigbtn.l{background:var(--lime);color:var(--ink)}
+.sumrow{display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0}
+.sumrow.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:7px;font-weight:800;font-size:13px}
+.bars{display:flex;gap:5px;align-items:center;font-size:10.5px;margin:3px 0}
+.bars i{flex:1;height:7px;background:#e8eae3;border-radius:4px;overflow:hidden;position:relative}
+.bars i:after{content:'';position:absolute;inset:0;width:var(--v);background:var(--ok);border-radius:4px}
+.tl{list-style:none;position:relative;padding-left:19px}
+.tl:before{content:'';position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:#dfe3d6}
+.tl li{position:relative;font-size:11px;margin:6px 0;color:var(--ink2)}
+.tl li:before{content:'';position:absolute;left:-19px;top:4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid #c3c8ba}
+.tl li.on:before{background:var(--lime);border-color:var(--ok)}
+.tl li b{display:block;color:var(--ink);font-size:11.5px}
+
+/* kakao alimtalk */
+.kk{background:var(--kbg);padding:12px 10px 16px;min-height:430px}
+.kk .day{text-align:center;font-size:10px;color:#fff;background:rgba(0,0,0,.18);border-radius:10px;width:fit-content;margin:0 auto 10px;padding:1px 10px}
+.kk .from{display:flex;gap:7px}
+.kk .pf{width:30px;height:30px;border-radius:11px;background:var(--ink);color:var(--lime);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.kk .nm{font-size:10.5px;color:#41505c;margin-bottom:3px}
+.kk .bub{background:#fff;border-radius:4px 14px 14px 14px;overflow:hidden;max-width:212px;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.kk .bh{background:var(--kakao);font-size:11px;font-weight:800;padding:7px 11px}
+.kk .bb{padding:10px 11px;font-size:11px;line-height:1.55;color:#222}
+.kk .bb p{margin:0 0 6px}
+.kk .kb{display:block;text-align:center;border-top:1px solid #eee;font-size:11px;font-weight:700;padding:8px;color:#333}
+.kk .tm{font-size:9px;color:#5f6f7a;align-self:flex-end;margin-left:4px}
+
+/* tables in doc */
+.dt{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);font-size:14px}
+.dt th{background:var(--ink);color:#fff;text-align:left;padding:10px 12px;font-size:13px;font-weight:700}
+.dt td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.dt td:first-child{color:var(--ink);font-weight:700;white-space:nowrap}
+.dt .num{font-family:Consolas,Menlo,monospace;font-weight:800;color:var(--ok)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px}
+
+.merge{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:14px;padding:16px 20px;margin:20px 0}
+.merge b{color:var(--lime)}
+.foot{color:var(--ink3);font-size:12.5px;text-align:center;padding:40px 0 50px}
+
+/* ---------- responsive (갤럭시 폴드: 커버 344~412px · 메인 ~884px) ---------- */
+@media (max-width:980px){
+  .step{grid-template-columns:1fr;gap:20px;padding:22px 20px}
+  .diff{grid-template-columns:1fr}
+  .step.wide>div:first-child{display:block}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .wrap{padding:0 14px}
+  .cover{padding:36px 0 28px}
+  .cover h1{font-size:28px;letter-spacing:-1px}
+  .ph h2{font-size:22px}
+  .step{padding:18px 15px;border-radius:15px}
+  .step h3{font-size:18.5px}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+  .mocks.row{flex-direction:column;align-items:stretch}
+  .mocks.row>div{width:100%;flex:none!important;display:flex;flex-direction:column;align-items:center}
+  .mocks.row>div>.desk{width:100%}
+  .desk .scr{overflow-x:auto}
+  .anav span:nth-child(n+6){display:none}
+  .phone{width:100%;max-width:300px}
+  .chain{grid-template-columns:1fr 1fr}
+  .atable .hm{display:none}
+  .dt{font-size:13px}.dt td,.dt th{padding:8px 9px}
+  .dt td:first-child{white-space:normal}
+}
+@media print{
+  body{background:#fff}.cover{background:#fff;color:#000}.cover p{color:#333}.toc{display:none}
+  .step{break-inside:avoid;box-shadow:none}
+}
+</style>
+<!--ssr-mobile--><style>@media(max-width:900px){html{-webkit-text-size-adjust:100%}
+img,video,svg{max-width:100%;height:auto}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+pre,code{white-space:pre-wrap;word-break:break-all}}</style></head>
+<body>
+
+<header class="cover"><div class="wrap">
+  <div class="kick">SSAMIDA · OPERATIONS MANUAL</div>
+  <h1>쌤이다 수강 등록,<br><em>처음부터 첫 수업까지</em></h1>
+  <p>신청이 들어온 순간부터 정규 수업이 열리기까지 누가 어느 화면에서 무엇을 누르는지 정리했습니다. 무료수업을 거치는 <b>무료수업 경로</b>, 사업부가 방문해 바로 계약하는 <b>방문 경로</b> 두 가지입니다. 화면 예시는 실제 화면 구성을 따라 그렸고, 이름·금액은 예시입니다.</p>
+  <nav class="toc">
+    <a href="#overview">한눈에 보기</a>
+    <a href="#trial">A. 무료수업 경로</a>
+    <a href="#visit">B. 방문 경로</a>
+    <a href="#talk">알림톡 일람</a>
+    <a href="#caution">자주 막히는 곳</a>
+  </nav>
+  <div class="legend">
+    <span><i class="who w-ops">운영진</i> 어드민에서 처리</span>
+    <span><i class="who w-tch">쌤</i> 티칭룸에서 처리</span>
+    <span><i class="who w-par">학부모·학생</i> 휴대폰에서 처리</span>
+    <span><i class="who w-auto">자동</i> 시스템이 알아서 발송</span>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<!-- ===================== OVERVIEW ===================== -->
+<section class="part" id="overview">
+  <div class="ph"><span class="no">00</span><h2>한눈에 보기</h2><p>두 경로는 앞부분만 다르고, 「상담 확정」부터는 똑같은 화면을 탑니다.</p></div>
+
+  <div class="flows">
+    <div class="flow">
+      <h3>A. 무료수업 경로 <small>리드 → 무료수업 30분 → 리포트 → 통화 → 결제 → 정규 확정</small></h3>
+      <ol class="chain">
+        <li><a href="#a1"><span class="who w-ops">운영진</span><b>리드 확인 · 일정 확정</b><i>알림톡 24</i></a></li>
+        <li><a href="#a2"><span class="who w-ops">운영진</span><b>온보딩 · 쌤 배정</b></a></li>
+        <li><a href="#a3"><span class="who w-tch">쌤</span><b>배정 확인 · 수업방 열기 · 준비 완료</b><i>알림톡 1</i></a></li>
+        <li><a href="#a4"><span class="who w-par">학생</span><b>입장 · 무료수업</b></a></li>
+        <li><a href="#a5"><span class="who w-tch">쌤</span><b>리포트 제출</b></a></li>
+        <li><a href="#a6"><span class="who w-ops">운영진</span><b>검수 후 발송</b><i>알림톡 25</i></a></li>
+        <li class="same"><a href="#a7"><span class="who w-ops">운영진</span><b>통화 · 상담 확정</b><i>알림톡 26</i></a></li>
+        <li class="same"><a href="#a8"><span class="who w-par">학부모</span><b>가입 · 카드 등록 · 결제</b><i>알림톡 3 · 4</i></a></li>
+        <li class="same"><a href="#a9"><span class="who w-ops">운영진</span><b>정규 수업 확정</b><i>알림톡 5</i></a></li>
+      </ol>
+    </div>
+    <div class="flow">
+      <h3>B. 방문 경로 (사업부) <small>방문 상담 → 직접 등록 → 결제 → 정규 확정 · 무료수업 없음</small></h3>
+      <ol class="chain">
+        <li><a href="#b1"><span class="who w-ops">사업부</span><b>방문 · 학부모 OK</b></a></li>
+        <li><a href="#b2"><span class="who w-ops">운영진</span><b>직접 등록</b></a></li>
+        <li class="same"><a href="#b3"><span class="who w-ops">운영진</span><b>상담 확정 · 결제 안내</b><i>알림톡 26</i></a></li>
+        <li class="same"><a href="#b4"><span class="who w-par">학부모</span><b>가입 · 결제수단 등록 · 결제</b><i>알림톡 3 · 4</i></a></li>
+        <li class="same"><a href="#b5"><span class="who w-ops">운영진</span><b>정규 수업 확정</b><i>알림톡 5</i></a></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="box"><h4>두 경로가 다른 점</h4><ul>
+      <li>방문 경로는 <b>무료수업·리포트 단계가 없습니다.</b> 「직접 등록」 저장이 곧 상담 확정 화면으로 이어집니다.</li>
+      <li>방문 경로는 <b>첫 결제 할인(과목당 2만원)이 적용되지 않습니다.</b> 첫 결제 = 월 수강료 그대로.</li>
+      <li>방문 경로는 등록할 때 <b>유입경로를 「사업부 방문」</b>으로 고릅니다. 무료수업 지표와 따로 집계됩니다.</li>
+    </ul></div>
+    <div class="box"><h4>두 경로가 같은 점</h4><ul>
+      <li>결제 안내 알림톡(26) → 학부모 가입 → 휴대폰 확인 → 카드 등록·첫 결제 → 운영진 「정규 수업 확정」.</li>
+      <li>결제는 <b>정기결제(매달 같은 날 자동)</b>가 기본입니다. 정기결제를 원치 않으면 상담 확정에서 「단건 · 수동 금액」을 고릅니다.</li>
+      <li><b>정규 수업 확정을 눌러야</b> 수업 회차·다음 달 자동결제·첫 수업 안내가 생깁니다.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ===================== A. TRIAL ===================== -->
+<section class="part" id="trial">
+  <div class="ph"><span class="no">A</span><h2>무료수업 경로</h2><p>예시 — 김하린 학생 · 중2 · 수학 · 무료수업 30분 · 이도윤 쌤</p></div>
+
+  <!-- A1 -->
+  <article class="step" id="a1">
+    <div>
+      <div class="sh"><span class="sn">A-1</span><span class="who w-ops">운영진</span></div>
+      <h3>리드 확인하고 무료수업 일정 잡기</h3>
+      <span class="path">어드민 › 리드</span>
+      <ol class="do">
+        <li>랜딩·광고로 들어온 신청이 <b>리드 보드</b>에 쌓입니다. 「오늘 유입」「미배정」부터 봅니다.</li>
+        <li>학부모에게 전화해 무료수업 날짜·시간을 정합니다. 못 받으면 <b>「부재 알림톡」</b>을 보냅니다.</li>
+        <li>정해지면 <b>「일정 확정 알림톡」</b>을 보내고 <b>「온보딩으로 넘기기 →」</b>를 누릅니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 24 · 온보딩 일정 확정</b> → 학부모 (선택창 없이 바로 발송)</div>
+      <p class="tip">같은 전화번호·같은 학생 이름이 이미 있으면 「같은 번호·이름 회원 있음」으로 표시됩니다. 번호만 같으면 형제일 수 있으니 그대로 넘겨도 됩니다.</p>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/lead_board.asp</span></div>
+        <div class="scr">
+          <div class="anav"><b>쌤이다</b><span>대시보드</span><span class="on">리드</span><span>온보딩</span><span>회원</span><span>강사</span><span>수업</span><span>결제</span></div>
+          <div class="abody">
+            <div class="atitle"><h5>리드</h5><span class="btn">+ 리드 추가</span></div>
+            <div class="tiles"><div class="tile on"><small>오늘 유입</small><b>6</b></div><div class="tile"><small>미배정</small><b>2</b></div><div class="tile"><small>연락 중</small><b>9</b></div><div class="tile"><small>회원 전환</small><b>14</b></div></div>
+            <table class="atable">
+              <tr><th>신청</th><th>이름 · 학년</th><th class="hm">유입</th><th>상태</th><th></th></tr>
+              <tr class="hl"><td>11/17 10:12</td><td><b>김하린</b> · 중2</td><td class="hm">메타 광고</td><td><span class="pill p-ok">시강</span></td><td><span class="btn">일정 확정 알림톡</span> <span class="btn p ring">온보딩으로 넘기기 →</span></td></tr>
+              <tr><td>11/17 09:40</td><td>박서준 · 중1</td><td class="hm">네이버</td><td><span class="pill p-w">부재</span></td><td><span class="btn">부재 알림톡</span></td></tr>
+              <tr><td>11/16 22:05</td><td>최유나 · 고1</td><td class="hm">메타 광고</td><td><span class="pill p-new">신규</span></td><td><span class="btn">상태 변경…</span></td></tr>
+            </table>
+          </div>
+        </div></div>
+    </div>
+  </article>
+
+  <!-- A2 -->
+  <article class="step" id="a2">
+    <div>
+      <div class="sh"><span class="sn">A-2</span><span class="who w-ops">운영진</span></div>
+      <h3>온보딩 목록에서 쌤 배정하기</h3>
+      <span class="path">어드민 › 온보딩 › (학생 줄) › 쌤 배정</span>
+      <ol class="do">
+        <li>넘어온 건은 <b>「쌤 배정 대기 · 가장 먼저 처리」</b> 칸에 들어옵니다.</li>
+        <li>줄을 눌러 <b>쌤 배정</b> 화면으로 갑니다. 학부모 희망시간이 수업 일시에 미리 들어가 있습니다.</li>
+        <li>추천 순서(<b>과목 일치 · 그 시간대 가능 · 일정 겹침 없음</b>)대로 뜬 쌤 중 하나를 골라 <b>「이 쌤으로 배정」</b>을 누릅니다. 1순위를 그대로 쓰면 「1순위 쌤으로 자동 배정」.</li>
+      </ol>
+      <p class="tip">배정이 끝나면 「배정됨 · 48시간 내 건」 칸으로 옮겨갑니다. 부재·거절·연기는 같은 목록의 「처리」에서 사유와 함께 마감하거나 새 희망시간을 받습니다.</p>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/free_class_assign.asp</span></div>
+        <div class="scr">
+          <div class="anav"><b>쌤이다</b><span>대시보드</span><span>리드</span><span class="on">온보딩</span><span>회원</span><span>강사</span></div>
+          <div class="abody">
+            <div class="atitle"><h5>쌤 배정</h5><span class="btn">← 무료수업 목록</span></div>
+            <div class="two">
+              <div class="card2"><h6>김하린 · 중2 · 수학</h6>
+                <dl class="kv"><dt>현재 쌤</dt><dd>아직 미배정</dd><dt>희망시간</dt><dd>11/19(수) 19:00</dd><dt>전달사항</dt><dd>분수 계산 실수가 잦음</dd></dl>
+                <div class="flabel">수업 일시</div><div class="field">2026-11-19 (수) 19:00 · 30분</div>
+              </div>
+              <div class="card2"><h6>쌤 고르기 <span style="font-weight:600;color:var(--ink3);font-size:10.5px">· 시간대 기준 추천</span></h6>
+                <div class="tlist">
+                  <div class="t"><span class="av">이</span><div><b>이도윤 쌤</b><small>✓ 담당 과목 ✓ 그 시간 가능</small></div><span class="btn p ring">이 쌤으로 배정</span></div>
+                  <div class="t"><span class="av">정</span><div><b>정민서 쌤</b><small>✓ 담당 과목 ✓ 그 시간 가능</small></div><span class="btn">배정</span></div>
+                  <div class="t" style="opacity:.55"><span class="av">한</span><div><b>한지우 쌤</b><small style="color:var(--warn)">일정 겹침</small></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div>
+  </article>
+
+  <!-- A3 -->
+  <article class="step" id="a3">
+    <div>
+      <div class="sh"><span class="sn">A-3</span><span class="who w-tch">쌤</span><span class="who w-auto">자동</span></div>
+      <h3>쌤이 배정 확인 → 수업방 열기 → 준비 완료</h3>
+      <span class="path">티칭룸 › 수업 캘린더 › 무료수업 배정 상세</span>
+      <ol class="do">
+        <li>쌤이 티칭룸에 로그인해 <b>「배정 확인」</b>을 누릅니다. 운영 화면에도 「확인함」으로 바뀝니다.</li>
+        <li>사전 정보(통화 메모·학부모 요청·교재)를 읽습니다.</li>
+        <li>수업 시간이 다가오면 <b>「수업방 열기」</b>를 누릅니다. 3시간 전부터 활성화됩니다.</li>
+        <li><b>「준비 완료 · 입장 안내 보내기」</b>를 누르면 학부모 휴대폰으로 입장 링크가 나갑니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 1 · 무료 수업 안내</b> → 학부모 (수업 일시·교재·쌤 이름 + 입장 버튼)</div>
+      <p class="tip">학부모가 링크를 못 찾으면 쌤 화면의 「링크 재발급」으로 새 링크를 보낼 수 있습니다. 새로 발급하면 이전 링크는 바로 막힙니다.</p>
+    </div>
+    <div class="mocks row">
+      <div style="flex:1 1 300px;min-width:0">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/teacher/free_trial_detail.asp</span></div>
+        <div class="scr">
+          <div class="tnav"><b>쌤이다<em>티칭룸</em></b><span>← 수업 캘린더</span></div>
+          <div class="abody">
+            <div class="atitle"><h5>학생 무료수업</h5><span class="pill p-ok">확인함</span></div>
+            <div class="card2"><h6>학생 · 수업 정보</h6><dl class="kv"><dt>학생</dt><dd>김하린 · 중2</dd><dt>과목 · 과정</dt><dd>수학 · 기본과정</dd><dt>일시</dt><dd>11/19(수) 19:00 · 30분</dd></dl></div>
+            <div class="card2"><h6>사전 정보 <span style="font-weight:600;color:var(--ink3)">· 운영팀이 통화로 받은 내용</span></h6><p style="font-size:11px;color:var(--ink2)">분수 계산 실수가 잦음. 학원 숙제는 하는데 오답 정리를 안 함.</p></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="btn">배정 확인 완료</span><span class="btn">수업방 열기</span><span class="btn l ring">준비 완료 · 입장 안내 보내기</span></div>
+          </div>
+        </div></div>
+      </div>
+      <div><div class="phone"><div class="notch"></div><div class="kk">
+        <div class="day">2026년 11월 19일 수요일</div>
+        <div class="from"><span class="pf">쌤이다</span><div><div class="nm">쌤이다</div>
+          <div style="display:flex"><div class="bub"><div class="bh">알림톡 도착</div><div class="bb">
+            <p><b>[쌤이다] 무료 수업 안내</b></p>
+            <p>김하린 학생의 수학 무료 수업(30분)을 안내드립니다.</p>
+            <p>· 수업 일시: 11/19(수) 19:00<br>· 교재: 개념원리 중2-2<br>· 선생님: 이도윤 쌤</p>
+            <p>수업 5분 전 아래 버튼으로 수업방에 입장해 주세요.</p></div>
+            <span class="kb">수업방 입장하기</span></div><span class="tm">18:42</span></div>
+        </div></div></div></div><p class="cap">학부모 휴대폰 · 알림톡 1</p></div>
+    </div>
+  </article>
+
+  <!-- A4 -->
+  <article class="step" id="a4">
+    <div>
+      <div class="sh"><span class="sn">A-4</span><span class="who w-par">학생</span><span class="who w-tch">쌤</span></div>
+      <h3>학생 입장 · 무료수업 30분</h3>
+      <span class="path">알림톡 버튼 › 수업방 (화상)</span>
+      <ol class="do">
+        <li>학생이 알림톡의 <b>「수업방 입장하기」</b>를 눌러 바로 화상 수업방으로 들어옵니다. 따로 가입·로그인하지 않습니다.</li>
+        <li>쌤과 30분 수업을 진행합니다.</li>
+        <li>수업이 끝나면 화상 종료와 학생 참여 기록이 자동으로 반영되고, 그때부터 리포트를 쓸 수 있습니다.</li>
+      </ol>
+      <div class="out"><span class="t">운영진에게 자동으로 오는 것</span><b>알림톡 10 · 11 · 12</b> — 수업 5분 전 미입장 / 시작 시간 미입장 / 수업 끊김·일찍 닫힘. 오면 바로 수업방을 확인합니다.</div>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>화상 수업방 · 무료수업</span></div>
+        <div class="scr" style="background:#1c1f1a;padding:12px">
+          <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px">
+            <div style="background:#2b3027;border-radius:10px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#cfd4c6;font-size:11px;gap:6px"><span class="av" style="width:46px;height:46px;font-size:15px">이</span>이도윤 쌤 · 판서 공유 중</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="background:#2b3027;border-radius:10px;flex:1;display:flex;align-items:center;justify-content:center;color:#cfd4c6;font-size:10.5px">김하린</div>
+              <div style="background:#2b3027;border-radius:10px;padding:8px;color:#cfd4c6;font-size:10px">남은 시간<br><b style="color:var(--lime);font-size:15px">12:40</b></div>
+            </div>
+          </div>
+        </div></div>
+      <p class="cap">수업 화면은 화상 업체 화면이라 예시로만 표시했습니다.</p>
+    </div>
+  </article>
+
+  <!-- A5 -->
+  <article class="step" id="a5">
+    <div>
+      <div class="sh"><span class="sn">A-5</span><span class="who w-tch">쌤</span></div>
+      <h3>쌤이 무료수업 리포트 쓰고 제출</h3>
+      <span class="path">티칭룸 › 무료체험 수업 › 리포트 작성</span>
+      <ol class="do">
+        <li>수업이 끝나면 바로 <b>「리포트 작성」</b>을 엽니다. 사전 정보는 읽기 전용으로 위에 붙어 있습니다.</li>
+        <li><b>수업 내용</b>(300자), <b>이해도·참여도</b>, <b>강점</b>, <b>앞으로의 방향</b>(400자), <b>학생에게 한마디</b>(200자), 학부모에게 전하고픈 말을 채웁니다.</li>
+        <li><b>「수업 완료 · 리포트 제출」</b>을 누릅니다. 수업 완료 처리와 운영팀 확인 요청이 한 번에 됩니다.</li>
+      </ol>
+      <div class="warnbox"><span class="t">학부모에게 바로 가지 않습니다</span>제출하면 「운영팀 확인 대기」가 됩니다. 운영진이 검수해야 나갑니다. 기한을 넘기면 운영진에게 <b>알림톡 16 · 리포트 작성 기한 지남</b>이 갑니다.</div>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/teacher/free_trial_report.asp</span></div>
+        <div class="scr">
+          <div class="tnav"><b>쌤이다<em>티칭룸</em></b><span>수업 관리 · 무료체험 리포트</span></div>
+          <div class="abody">
+            <div class="card2"><dl class="kv"><dt>학생</dt><dd>김하린 · 중2 · 수학</dd><dt>구분</dt><dd>무료체험 (1회)</dd></dl></div>
+            <div class="flabel">수업 내용 · 학부모 공개 (최대 300자)</div><div class="field">분수의 사칙연산 복습 → 통분 실수 유형 3가지 확인</div>
+            <div class="two" style="margin-top:4px"><div><div class="flabel">이해도</div><div class="bars"><i style="--v:70%"></i>70</div></div><div><div class="flabel">참여도</div><div class="bars"><i style="--v:90%"></i>90</div></div></div>
+            <div class="flabel">강점</div><div class="field">설명을 들으면 바로 따라 풀어 봄</div>
+            <div class="flabel">앞으로의 방향 (최대 400자)</div><div class="field ph">어머니가 바라는 것과 학생의 강점을 이어서…</div>
+            <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:9px;flex-wrap:wrap"><span class="btn">임시 저장</span><span class="btn p ring">수업 완료 · 리포트 제출</span></div>
+          </div>
+        </div></div>
+    </div>
+  </article>
+
+  <!-- A6 -->
+  <article class="step" id="a6">
+    <div>
+      <div class="sh"><span class="sn">A-6</span><span class="who w-ops">운영진</span><span class="who w-auto">자동</span></div>
+      <h3>운영진 검수 후 학부모에게 리포트 발송</h3>
+      <span class="path">어드민 › 온보딩 › 학생 카드 › 리포트 검수</span>
+      <ol class="do">
+        <li>쌤이 제출하면 학생 카드에 <b>「검수 대기」</b>가 뜹니다. <b>「리포트 검수」</b>를 엽니다.</li>
+        <li>왼쪽에서 문장을 다듬고, 오른쪽 <b>학부모 화면 미리보기</b>로 실제로 어떻게 보일지 확인합니다.</li>
+        <li><b>「검토 후 알림톡 보내기 →」</b>를 누르면 지금 내용을 저장하고 바로 학부모에게 보냅니다. 보내지 않고 고치기만 할 땐 「수정 저장」.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 25 · 무료 수업 리포트</b> → 학부모. 리포트 화면에는 「상담 전화 → 등록 안내 → 정규 수업 시작」 순서가 안내돼 있습니다. 이 단계에는 결제 버튼이 없습니다.</div>
+    </div>
+    <div class="mocks row">
+      <div style="flex:1 1 300px;min-width:0">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/free_trial_report_review.asp</span></div>
+        <div class="scr"><div class="abody">
+          <div class="atitle"><h5>무료수업 리포트 검수</h5><span class="pill p-w">검수 대기</span></div>
+          <div class="card2"><h6>오늘 수업</h6><div class="field">분수의 사칙연산 복습 → 통분 실수 유형 3가지 확인</div>
+            <div class="flabel">선생님은 이렇게 하겠습니다</div><div class="field">오답 노트를 매 수업 첫 5분에 같이 확인하겠습니다.</div></div>
+          <div style="display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap"><span class="btn">수정 저장</span><span class="btn p ring">검토 후 알림톡 보내기 →</span></div>
+        </div></div></div>
+      </div>
+      <div><div class="phone"><div class="notch"></div><div class="pscr white">
+        <div class="ptitle">무료수업 리포트</div>
+        <h6>김하린 학생의 첫 수업,<br>이렇게 봤어요</h6>
+        <div class="pcard"><div class="tt">오늘 수업 평가</div><div class="bars">이해도 <i style="--v:70%"></i></div><div class="bars">참여도 <i style="--v:90%"></i></div></div>
+        <div class="pcard"><div class="tt">잘한 점 · 강점</div><p style="font-size:11px;color:var(--ink2)">설명을 들으면 바로 따라 풀어 봐요.</p></div>
+        <div class="pcard"><div class="tt">앞으로 이렇게 진행돼요</div>
+          <ul class="tl"><li class="on"><b>무료수업 · 리포트</b>지금 이 리포트까지 확인하셨어요.</li><li><b>상담 전화</b>운영팀이 곧 전화드려요.</li><li><b>등록 안내</b>정해지면 결제 안내를 카톡으로.</li><li><b>정규 수업 시작</b></li></ul></div>
+      </div></div><p class="cap">학부모 휴대폰 · 리포트 화면</p></div>
+    </div>
+  </article>
+
+  <!-- A7 -->
+  <article class="step" id="a7">
+    <div>
+      <div class="sh"><span class="sn">A-7</span><span class="who w-ops">운영진</span><span class="who w-auto">자동</span></div>
+      <h3>통화로 쌤·수강권·시간 정하고 「상담 확정」</h3>
+      <span class="path">어드민 › 학생 카드 › 상담 확정 (무료 수업 → 정규 수강)</span>
+      <ol class="do">
+        <li>리포트를 보낸 뒤 학부모와 통화해 <b>담당 쌤 · 수강권 · 요일·시간</b>을 정합니다.</li>
+        <li><b>상담 확정</b> 화면에서 담당 쌤과 수강권을 고릅니다. 금액은 자동 계산되고, 첫 결제 할인(과목당 2만원)이 체크돼 있습니다.</li>
+        <li>요일·시간을 고르면 <b>첫 수업일</b>이 자동으로 정해집니다. 쌤 가능 시간 밖은 고를 수 없습니다.</li>
+        <li><b>「학부모와 통화하여 위 쌤·수강권·시간표를 확인했습니다」</b>에 체크하고 <b>「상담 확정 내용 확인」</b>.</li>
+        <li>오른쪽 <b>「가입 · 결제 안내」</b>를 보내면 학부모에게 결제 링크가 나갑니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 26 · 정규 수업 결제 안내</b> → 학부모. 수강권·금액·쌤 이름 + 결제 버튼. <b>링크는 24시간 유효</b>합니다.</div>
+      <p class="tip">정기결제를 원치 않는 학부모는 「단건 · 수동 금액」을 고르고 금액과 조정 사유를 넣습니다. 그러면 입력한 금액 그대로 1회 결제 안내가 나갑니다.</p>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/free_regular.asp</span></div>
+        <div class="scr">
+          <div class="anav"><b>쌤이다</b><span>리드</span><span class="on">온보딩</span><span>회원</span><span>결제</span></div>
+          <div class="abody">
+            <div class="atitle"><h5>무료 수업에서 정규 수강으로</h5></div>
+            <div class="stepper"><span class="on">1. 상담 확정</span><span>2. 가입 · 결제 확인</span><span>3. 정규 수업 확정</span></div>
+            <div class="two">
+              <div class="card2"><h6>학부모와 확정할 정규 수업</h6>
+                <div class="flabel">담당 쌤</div><div class="field">이도윤 쌤</div>
+                <div class="flabel">수강권</div><div class="field">기본과정 · 주 2회 · 월 380,000원</div>
+                <div class="chk">첫 결제 할인 과목당 20,000원 적용</div>
+                <div class="flabel">확정할 요일 · 시간</div><div class="field">화 19:00 · 목 19:00</div>
+                <div style="font-size:10.5px;color:var(--ok);margin-top:4px;font-weight:700">첫 수업일 11/25(화)</div>
+                <div class="chk">학부모와 통화하여 위 쌤 · 수강권 · 시간표를 확인했습니다.</div>
+                <div style="margin-top:8px"><span class="btn p">상담 확정 내용 확인</span></div>
+              </div>
+              <div class="card2"><h6>정규 수강 연결 상태</h6>
+                <dl class="kv"><dt>상담</dt><dd><span class="pill p-ok">확정</span></dd><dt>가입</dt><dd>아직 가입 전</dd><dt>결제</dt><dd>결제 확인 후 가능</dd></dl>
+                <div style="margin-top:9px"><span class="btn l ring">가입 · 결제 안내 보내기</span></div>
+                <div style="margin-top:6px"><span class="btn g">정규 수업 확정</span></div>
+                <p style="font-size:10px;color:var(--ink3);margin-top:4px">학부모 결제가 확인되면 켜져요.</p>
+              </div>
+            </div>
+          </div>
+        </div></div>
+    </div>
+  </article>
+
+  <!-- A8 -->
+  <article class="step wide" id="a8">
+    <div>
+      <div class="sh"><span class="sn">A-8</span><span class="who w-par">학부모</span><span class="who w-auto">자동</span></div>
+      <h3>학부모가 가입하고 카드 등록 · 첫 결제</h3>
+      <span class="path">알림톡 26 버튼 › 회원가입 › 수강 신청 · 자동결제</span>
+      <ol class="do">
+        <li>알림톡의 결제 버튼을 누르면 <b>회원가입</b> 화면이 열립니다. 학생 정보와 확정된 수업 시간이 미리 채워져 있어 <b>아이디·비밀번호만</b> 정하면 됩니다. 학생 스터디룸 계정으로 가입됩니다.</li>
+        <li>이어서 <b>수강 신청 · 자동결제</b> 화면에서 상담 내용 그대로인지 확인합니다.</li>
+        <li><b>학부모 휴대폰 확인</b> — 인증번호를 받아 입력합니다.</li>
+        <li>자동결제 동의 후 <b>「휴대폰 확인 후 카드 등록 · 결제」</b> → KISPG 결제창에서 카드를 등록하면 첫 결제가 진행됩니다.</li>
+        <li>결제 완료 화면에 <b>이번 결제 금액 · 다음 결제일</b>이 뜹니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 3 · 회원가입 완료</b>(가입 직후) · <b>알림톡 4 · 결제 완료</b>(결제 직후) → 학부모<br>운영진 알림함에 <b>「결제 완료 — 정규 수업 확정 대기」</b>가 뜹니다.</div>
+      <div class="warnbox"><span class="t">이 시점엔 아직 수업이 없습니다</span>학생이 스터디룸에 로그인하면 「승인 대기 중」 화면이 보입니다. 운영진이 A-9 「정규 수업 확정」을 눌러야 열립니다.</div>
+    </div>
+    <div class="mocks row">
+      <div><div class="phone"><div class="notch"></div><div class="kk">
+        <div class="day">2026년 11월 20일 목요일</div>
+        <div class="from"><span class="pf">쌤이다</span><div><div class="nm">쌤이다</div>
+          <div style="display:flex"><div class="bub"><div class="bh">알림톡 도착</div><div class="bb">
+            <p><b>[쌤이다] 정규 수업 결제 안내</b></p>
+            <p>김하린 학생의 수학 정규 수업 등록을 안내드립니다.</p>
+            <p>· 수강권: 기본과정 주 2회<br>· 결제 금액: 360,000원<br>· 선생님: 이도윤 쌤</p>
+            <p>아래 버튼을 눌러 결제를 진행해 주세요.<br>결제 링크는 안내 도착 후 24시간 동안 유효합니다.</p></div>
+            <span class="kb">결제하기</span></div><span class="tm">14:05</span></div>
+        </div></div></div></div><p class="cap">① 알림톡 26</p></div>
+      <div><div class="phone"><div class="notch"></div><div class="pscr white">
+        <div class="ptitle">회원가입</div>
+        <h6>학생 정보를 확인하고<br>계정을 만들어 주세요</h6>
+        <div class="pcard"><div class="tt">미리 채워진 학생 정보</div><dl class="kv"><dt>학생</dt><dd>김하린 · 중2</dd><dt>학부모</dt><dd>010-****-1234</dd></dl></div>
+        <div class="pcard"><div class="tt">확정된 수업 시간 <span style="color:var(--ink3);font-weight:600">(상담에서 정한 시간)</span></div><p style="font-size:11px">화 19:00 · 목 19:00</p></div>
+        <div class="flabel">로그인 아이디</div><div class="field">harin2012</div>
+        <div class="flabel">비밀번호</div><div class="field">••••••••</div>
+        <div class="chk">이용약관 및 개인정보처리방침에 동의합니다.</div>
+        <span class="bigbtn">아이디로 가입</span>
+      </div></div><p class="cap">② 회원가입</p></div>
+      <div><div class="phone"><div class="notch"></div><div class="pscr">
+        <div class="ptitle">수강 신청 · 자동결제</div>
+        <h6>김하린 학생의 수업,<br>결제만 하면 시작돼요</h6>
+        <div class="pcard"><div class="tt">상담에서 확정한 수업</div><p style="font-size:11px">수학 · 이도윤 쌤 · 60분 · 주 2회</p></div>
+        <div class="pcard"><div class="tt">학부모 휴대폰 확인</div><div class="field" style="display:flex;justify-content:space-between">010-****-1234 <span style="font-weight:700">인증번호 받기</span></div></div>
+        <div class="pcard"><div class="tt">결제 내역</div>
+          <div class="sumrow"><span>월 수강료</span><span>380,000원</span></div>
+          <div class="sumrow" style="color:var(--ok)"><span>첫 결제 할인</span><span>− 20,000원</span></div>
+          <div class="sumrow tot"><span>오늘 결제</span><span>360,000원</span></div>
+          <div class="sumrow" style="color:var(--ink3)"><span>다음 달부터 매달</span><span>380,000원</span></div></div>
+        <span class="bigbtn l">휴대폰 확인 후 카드 등록 · 결제</span>
+      </div></div><p class="cap">③ 카드 등록 · 첫 결제</p></div>
+    </div>
+  </article>
+
+  <!-- A9 -->
+  <article class="step" id="a9">
+    <div>
+      <div class="sh"><span class="sn">A-9</span><span class="who w-ops">운영진</span><span class="who w-auto">자동</span></div>
+      <h3>운영진 「정규 수업 확정」 — 여기서 끝</h3>
+      <span class="path">어드민 › 알림함 「결제 완료 — 정규 수업 확정 대기」 › 학생 카드</span>
+      <ol class="do">
+        <li>알림함이나 학생 카드에 <b>「결제가 확인됐어요 — 정규 수업을 확정해 주세요」</b>가 뜹니다.</li>
+        <li>결제 금액·시간표가 상담 내용과 맞는지 확인하고 <b>「정규 수업 확정」</b>을 누릅니다.</li>
+        <li>한 번에 처리되는 것: <b>수업 회차 생성 · 다음 달 자동결제 연결 · 회원 승인(스터디룸 열림) · 첫 수업 안내</b>.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 5 · 첫 수업 안내</b> → 학부모 (첫 수업 일시·쌤 이름 + 스터디룸 이용법)</div>
+      <div class="warnbox"><span class="t">이 버튼을 안 누르면</span>결제는 됐는데 수업 회차와 다음 달 자동결제가 <b>생기지 않습니다.</b> 학생은 계속 「승인 대기」 화면을 봅니다. 쌤 가능 시간이나 학생 일정이 겹치면 확정되지 않으니, 그때는 시간을 고쳐서 다시 누릅니다. 테스트 결제는 대상에서 빠집니다.</div>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/student_card.asp</span></div>
+        <div class="scr">
+          <div class="anav"><b>쌤이다</b><span>리드</span><span>온보딩</span><span class="on">회원</span><span>결제</span></div>
+          <div class="abody">
+            <div class="hero"><div><b>결제가 확인됐어요 — 정규 수업을 확정해 주세요</b><small>11/20 14:31 · 360,000원 · 카드 자동결제 등록됨</small></div><span class="btn l ring">정규 수업 확정</span></div>
+            <div class="stepper"><span class="done">1. 상담 확정</span><span class="done">2. 가입 · 결제 확인</span><span class="on">3. 정규 수업 확정</span></div>
+            <div class="two">
+              <div class="card2"><h6>결제</h6><dl class="kv"><dt>첫 결제</dt><dd>360,000원 — 첫 수업 할인</dd><dt>결제 수단</dt><dd>카드 · 자동결제</dd><dt>다음 결제</dt><dd>12/20 · 380,000원</dd></dl></div>
+              <div class="card2"><h6>상담 확정 내용</h6><dl class="kv"><dt>담당 쌤</dt><dd>이도윤 쌤</dd><dt>요일 · 시간</dt><dd>화·목 19:00</dd><dt>시작 예정</dt><dd>11/25(화)</dd></dl></div>
+            </div>
+          </div>
+        </div></div>
+    </div>
+  </article>
+</section>
+
+<div class="merge"><span style="font-size:22px">⇄</span><div>여기까지가 무료수업 경로입니다. <b>방문 경로는 B-3부터 A-7 ~ A-9와 같은 화면</b>을 씁니다.</div></div>
+
+<!-- ===================== B. VISIT ===================== -->
+<section class="part" id="visit">
+  <div class="ph"><span class="no">B</span><h2>방문 경로 (사업부)</h2><p>예시 — 박지호 학생 · 중1 · 영어 · 사업부 방문 계약 · 무료수업 없음</p></div>
+  <p class="lead">사업부가 학부모 집을 방문해 상담하고, 그 자리에서 수업을 하기로 정한 경우입니다. <b>현장에서는 카드 결제를 받지 않습니다.</b> 계약 내용만 정하고, 결제는 학부모가 휴대폰으로 받은 링크에서 정기결제로 등록합니다.</p>
+
+  <!-- B1 -->
+  <article class="step solo" id="b1">
+    <div>
+      <div class="sh"><span class="sn">B-1</span><span class="who w-ops">사업부</span><span class="who w-par">학부모</span></div>
+      <h3>방문 상담 → 학부모 OK</h3>
+      <ol class="do">
+        <li>학부모와 이미 이야기가 된 상태로 방문합니다. 상담을 거기서 처음 시작하는 게 아닙니다.</li>
+        <li>정해 올 것: <b>어떤 아이인지(이름·학년·학교) · 과목 · 원하는 요일·시간 · 특이사항 · 학부모 연락처</b>.</li>
+        <li><b>월 단위 정기결제만</b> 받습니다. 3·6개월 과정은 없습니다. 결제 링크가 카톡으로 간다고 안내합니다.</li>
+        <li>내용을 운영진에게 넘깁니다.</li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- B2 -->
+  <article class="step" id="b2">
+    <div>
+      <div class="sh"><span class="sn">B-2</span><span class="who w-ops">운영진</span></div>
+      <h3>「직접 등록」으로 회원 등록</h3>
+      <span class="path">어드민 › 리드 › 직접 등록 (또는 회원 › 직접 등록)</span>
+      <ol class="do">
+        <li><b>학생 이름 · 학년 · 학교 · 학생/학부모 연락처</b>를 넣습니다. 결제 안내 알림톡은 학부모 연락처로 갑니다.</li>
+        <li><b>과목</b>을 고르고, <b>유입경로는 「사업부 방문」</b>을 고릅니다.</li>
+        <li>희망 요일·시간과 특이사항(사업부 메모)을 적습니다.</li>
+        <li><b>「저장하고 상담확정으로」</b>를 누르면 바로 상담 확정 화면이 열립니다.</li>
+      </ol>
+      <div class="warnbox"><span class="t">여기서 입력하지 않는 것</span>아이디·비밀번호·금액은 이 화면에 없습니다. 아이디는 학부모가 링크에서 직접 만들고, 금액은 다음 화면에서 수강권을 고르면 정해집니다.</div>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/member_new.asp</span></div>
+        <div class="scr">
+          <div class="anav"><b>쌤이다</b><span class="on">리드</span><span>온보딩</span><span>회원</span><span>결제</span></div>
+          <div class="abody">
+            <div class="atitle"><h5>직접 등록</h5><span style="font-size:10.5px;color:var(--ink3)">등록 → 상담확정 → 결제 안내</span></div>
+            <div class="two">
+              <div class="card2"><h6>학생 · 학부모</h6>
+                <div class="flabel">학생 이름</div><div class="field">박지호</div>
+                <div class="flabel">학년 · 학교명</div><div class="field">중1 · 계양중</div>
+                <div class="flabel">학부모 연락처</div><div class="field">010-****-5678</div>
+              </div>
+              <div class="card2"><h6>수업 정보</h6>
+                <div class="flabel">과목</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="pill p-g">국어</span><span class="pill p-lime">영어</span><span class="pill p-g">수학</span><span class="pill p-g">사회</span><span class="pill p-g">과학</span></div>
+                <div class="flabel">유입경로</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="pill p-g">리드 연계</span><span class="pill p-lime">사업부 방문</span><span class="pill p-g">소개</span><span class="pill p-g">형제</span></div>
+                <p style="font-size:10px;color:var(--warn);margin-top:5px">사업부 방문·직접등록 건은 첫 결제 할인(과목당 2만원)이 적용되지 않습니다.</p>
+                <div class="flabel">희망 요일 · 시간</div><div class="field">월·수 18:00</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap"><span class="btn">취소</span><span class="btn p ring">저장하고 상담확정으로</span></div>
+          </div>
+        </div></div>
+    </div>
+  </article>
+
+  <!-- B3 -->
+  <article class="step" id="b3">
+    <div>
+      <div class="sh"><span class="sn">B-3</span><span class="who w-ops">운영진</span><span class="who w-auto">자동</span></div>
+      <h3>상담 확정 → 결제 안내 보내기 <span style="font-size:14px;color:var(--ok)">(= A-7과 같은 화면)</span></h3>
+      <span class="path">직접 등록 저장 직후 자동으로 열림</span>
+      <ol class="do">
+        <li>담당 쌤 · 수강권 · 확정할 요일·시간을 고릅니다. 사업부가 받아 온 시간과 쌤 가능 시간을 맞춥니다.</li>
+        <li><b>첫 결제 할인 칸은 꺼진 상태</b>입니다. 첫 결제 금액 = 월 수강료입니다.</li>
+        <li>「학부모와 확인했습니다」 체크 → <b>「상담 확정 내용 확인」</b> → <b>「가입 · 결제 안내 보내기」</b>.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 26 · 정규 수업 결제 안내</b> → 학부모 (24시간 유효 링크)</div>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/free_regular.asp</span></div>
+        <div class="scr"><div class="abody">
+          <div class="stepper"><span class="on">1. 상담 확정</span><span>2. 가입 · 결제 확인</span><span>3. 정규 수업 확정</span></div>
+          <div class="card2"><h6>학부모와 확정할 정규 수업 · 박지호 · 중1 · 영어</h6>
+            <div class="two"><div><div class="flabel">담당 쌤</div><div class="field">정민서 쌤</div></div><div><div class="flabel">수강권</div><div class="field">기본과정 · 주 2회 · 380,000원</div></div></div>
+            <div class="chk off">첫 결제 할인 과목당 20,000원 적용 <span style="color:var(--warn)">— 사업부 방문 건 미적용</span></div>
+            <div class="flabel">확정할 요일 · 시간</div><div class="field">월 18:00 · 수 18:00 &nbsp;→ 첫 수업일 11/24(월)</div>
+            <div class="chk">학부모와 통화하여 위 쌤 · 수강권 · 시간표를 확인했습니다.</div>
+            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="btn p">상담 확정 내용 확인</span><span class="btn l ring">가입 · 결제 안내 보내기</span></div>
+          </div>
+        </div></div></div>
+    </div>
+  </article>
+
+  <!-- B4 -->
+  <article class="step wide" id="b4">
+    <div>
+      <div class="sh"><span class="sn">B-4</span><span class="who w-par">학부모</span><span class="who w-auto">자동</span></div>
+      <h3>학부모가 직접 가입하며 결제수단 등록 <span style="font-size:14px;color:var(--ok)">(= A-8과 같은 화면)</span></h3>
+      <span class="path">알림톡 26 버튼 › 회원가입 › 휴대폰 확인 › 카드 등록 · 첫 결제</span>
+      <ol class="do">
+        <li>링크에서 아이디·비밀번호만 정해 가입합니다. 학생 정보와 시간표는 미리 채워져 있습니다.</li>
+        <li>학부모 휴대폰 인증 → 자동결제 동의 → KISPG 창에서 카드 등록.</li>
+        <li>첫 결제는 <b>월 수강료 그대로(할인 없음)</b>, 다음 달부터 매달 같은 날 자동결제됩니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 3 · 회원가입 완료</b> · <b>알림톡 4 · 결제 완료</b> → 학부모 / 운영진 알림함 「결제 완료 — 정규 수업 확정 대기」</div>
+    </div>
+    <div class="mocks row">
+      <div><div class="phone"><div class="notch"></div><div class="pscr">
+        <div class="ptitle">수강 신청 · 자동결제</div>
+        <h6>박지호 학생의 수업,<br>결제만 하면 시작돼요</h6>
+        <div class="pcard"><div class="tt">상담에서 확정한 수업</div><p style="font-size:11px">영어 · 정민서 쌤 · 60분 · 주 2회</p></div>
+        <div class="pcard"><div class="tt">결제 내역</div>
+          <div class="sumrow"><span>월 수강료</span><span>380,000원</span></div>
+          <div class="sumrow tot"><span>오늘 결제</span><span>380,000원</span></div>
+          <div class="sumrow" style="color:var(--ink3)"><span>다음 달부터 매달</span><span>380,000원</span></div></div>
+        <div class="chk">첫 결제 금액과 매달 결제 금액·날짜를 확인했고, 자동결제에 동의해요.</div>
+        <span class="bigbtn l">휴대폰 확인 후 카드 등록 · 결제</span>
+      </div></div><p class="cap">할인 줄이 없습니다</p></div>
+      <div><div class="phone"><div class="notch"></div><div class="pscr white">
+        <div class="ptitle">결제 완료</div>
+        <h6>결제가 완료됐어요</h6>
+        <div class="pcard"><dl class="kv"><dt>수업</dt><dd>영어 · 정민서 쌤</dd><dt>이번 결제</dt><dd>380,000원</dd><dt>다음 결제일</dt><dd>12/21</dd></dl></div>
+        <p style="font-size:11px;color:var(--ink2);margin:8px 2px">결제가 확인되면 상담한 시간표 그대로 운영팀이 수업을 배정해 드려요.</p>
+        <span class="bigbtn">스터디룸으로 가기</span>
+        <span class="bigbtn" style="background:#fff;color:var(--ink);border:1px solid var(--line)">결제 정보 보기</span>
+      </div></div><p class="cap">결제 완료 화면</p></div>
+    </div>
+  </article>
+
+  <!-- B5 -->
+  <article class="step" id="b5">
+    <div>
+      <div class="sh"><span class="sn">B-5</span><span class="who w-ops">운영진</span><span class="who w-auto">자동</span></div>
+      <h3>운영진 「정규 수업 확정」 <span style="font-size:14px;color:var(--ok)">(= A-9와 같은 화면)</span></h3>
+      <span class="path">어드민 › 알림함 › 학생 카드</span>
+      <ol class="do">
+        <li>「결제가 확인됐어요 — 정규 수업을 확정해 주세요」를 확인하고 <b>「정규 수업 확정」</b>.</li>
+        <li>수업 회차 · 다음 달 자동결제 · 회원 승인 · 첫 수업 안내가 한 번에 처리됩니다.</li>
+      </ol>
+      <div class="out"><span class="t">자동으로 나가는 것</span><b>알림톡 5 · 첫 수업 안내</b> → 학부모</div>
+      <p class="tip">사업부 수수료(1·4·13개월차) 추적은 정책이 확정되면 붙일 예정입니다. 지금은 유입경로 「사업부 방문」으로 구분해 둡니다.</p>
+    </div>
+    <div class="mocks">
+      <div class="desk"><div class="bar"><i></i><i></i><i></i><span>/wcms/admin/student_card.asp</span></div>
+        <div class="scr"><div class="abody">
+          <div class="hero"><div><b>결제가 확인됐어요 — 정규 수업을 확정해 주세요</b><small>박지호 · 영어 · 380,000원 · 유입 사업부 방문</small></div><span class="btn l ring">정규 수업 확정</span></div>
+          <div class="stepper"><span class="done">1. 상담 확정</span><span class="done">2. 가입 · 결제 확인</span><span class="on">3. 정규 수업 확정</span></div>
+          <p style="font-size:10.5px;color:var(--ink3)">누르면 수업 회차 생성 · 다음 달 자동결제 연결 · 첫 수업 안내가 한 번에 진행돼요.</p>
+        </div></div></div>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== ALIMTALK ===================== -->
+<section class="part" id="talk">
+  <div class="ph"><span class="no">C</span><h2>이 동선에서 나가는 알림톡</h2><p>번호는 알림톡 관리 화면의 템플릿 번호입니다.</p></div>
+  <div class="tscroll"><table class="dt">
+    <tr><th>번호</th><th>이름</th><th>언제 나가나</th><th>받는 사람</th><th>경로</th></tr>
+    <tr><td><span class="num">24</span></td><td>온보딩 일정 확정</td><td>리드 보드 「일정 확정 알림톡」</td><td>학부모</td><td>A</td></tr>
+    <tr><td><span class="num">23</span></td><td>부재 알림톡</td><td>리드 보드 「부재 알림톡」 (통화 실패)</td><td>학부모</td><td>A</td></tr>
+    <tr><td><span class="num">1</span></td><td>무료 수업 안내 (입장 버튼)</td><td>쌤이 「준비 완료 · 입장 안내 보내기」</td><td>학부모</td><td>A</td></tr>
+    <tr><td><span class="num">10 · 11 · 12</span></td><td>미입장 · 끊김 경보</td><td>수업 5분 전·시작 시 미입장, 끊김·일찍 닫힘</td><td>운영진</td><td>A · 정규</td></tr>
+    <tr><td><span class="num">16</span></td><td>리포트 작성 기한 지남</td><td>쌤이 기한 안에 리포트를 안 냄</td><td>운영진</td><td>A</td></tr>
+    <tr><td><span class="num">25</span></td><td>무료 수업 리포트 (결제 버튼 없음)</td><td>검수 화면 「검토 후 알림톡 보내기」</td><td>학부모</td><td>A</td></tr>
+    <tr><td><span class="num">26</span></td><td>정규 수업 결제 안내 (24시간)</td><td>상담 확정 후 「가입 · 결제 안내 보내기」</td><td>학부모</td><td>A · B</td></tr>
+    <tr><td><span class="num">3</span></td><td>회원가입 완료</td><td>학부모가 링크에서 가입</td><td>학부모</td><td>A · B</td></tr>
+    <tr><td><span class="num">4</span></td><td>결제 완료</td><td>첫 결제 승인</td><td>학부모</td><td>A · B</td></tr>
+    <tr><td><span class="num">5</span></td><td>첫 수업 안내</td><td>운영진 「정규 수업 확정」</td><td>학부모</td><td>A · B</td></tr>
+  </table></div>
+  <p class="tip">결제 안내·첫 수업 안내는 학생 카드의 「결제 안내 다시 보내기」「첫 수업 안내 다시 보내기」로 다시 보낼 수 있습니다. 학부모가 못 받았다고 할 때만 씁니다.</p>
+</section>
+
+<!-- ===================== CAUTION ===================== -->
+<section class="part" id="caution">
+  <div class="ph"><span class="no">D</span><h2>자주 막히는 곳</h2></div>
+  <div class="diff">
+    <div class="box"><h4>결제 후 수업이 안 열려요</h4><ul>
+      <li>운영진이 <b>「정규 수업 확정」</b>을 아직 안 누른 상태입니다. 결제만으로는 수업 회차·다음 달 자동결제가 생기지 않습니다.</li>
+      <li>확정이 안 눌리면 쌤 가능 시간이나 학생의 다른 수업과 겹친 경우입니다. 시간을 고친 뒤 다시 누릅니다.</li>
+    </ul></div>
+    <div class="box"><h4>결제 링크가 안 열려요</h4><ul>
+      <li>결제 안내(26) 링크는 <b>24시간 동안만</b> 유효합니다. 지나면 학생 카드에서 「결제 안내 다시 보내기」.</li>
+      <li>다른 계정으로 로그인돼 있으면 「다른 계정으로 로그인」을 눌러 안내받은 학생 계정으로 바꿉니다.</li>
+    </ul></div>
+    <div class="box"><h4>리포트가 안 나가요</h4><ul>
+      <li>쌤 제출 = 운영팀 확인 대기입니다. <b>검수 화면에서 「검토 후 알림톡 보내기」</b>를 눌러야 나갑니다.</li>
+      <li>쌤 리포트는 화상 종료와 학생 참여 기록이 확인된 뒤에만 쓸 수 있습니다. 방금 끝났으면 잠시 뒤 새로고침합니다.</li>
+    </ul></div>
+    <div class="box"><h4>할인 금액이 이상해요</h4><ul>
+      <li>첫 결제 할인은 <b>무료수업을 거친 최초 결제 1회</b>만, 과목당 2만원(2과목 4만원·3과목 6만원)입니다.</li>
+      <li>사업부 방문·직접 등록 건, 이미 결제 이력이 있는 학생, 추가 과목 결제에는 적용되지 않습니다.</li>
+    </ul></div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">쌤이다 운영 설명서 · 2026-11-17 기준 · 화면 예시의 이름·금액·연락처는 모두 예시입니다 · 내부용</footer>
+</body>
+</html>
