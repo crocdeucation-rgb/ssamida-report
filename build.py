@@ -62,6 +62,7 @@ def page(title, body, prefix):
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="{prefix}assets/style.css?v={CSSV}">
 </head><body>{body}
+<div id="lb" class="lb" hidden><img alt=""></div><script>(function(){{var lb=document.getElementById("lb"),im=lb.querySelector("img");document.addEventListener("click",function(ev){{var a=ev.target.closest("[data-full]");if(a){{ev.preventDefault();im.src=a.getAttribute("data-full");lb.hidden=false;return}}if(!lb.hidden&&ev.target.closest("#lb")){{lb.hidden=true;im.src=""}}}});document.addEventListener("keydown",function(ev){{if(ev.key==="Escape")lb.hidden=true}})}})();</script>
 <footer class="ft">쌤이다 총괄보고 · 아이스캔 그룹 내부용 · 외부 공유 금지</footer>
 </body></html>"""
 
@@ -88,7 +89,7 @@ def done_html(t, prefix):
     stv = t.get("story")
     if stv:
         steps = "".join(f"<li>{e(x)}</li>" for x in stv.get("steps", []))
-        pairs = "".join(f'''<div class="pair"><div class="pt"><div class="asis"><em>AS-IS</em><s>{e(q["asis"])}</s></div><div class="res"><em>RESULT</em><b>{e(q["result"])}</b></div><p class="why">{e(q["why"])}</p></div>{f'<a class="pimg" href="{e(prefix+q["img"])}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(q["img"])}.jpg" alt=""></a>' if q.get("img") else ""}</div>''' for q in stv.get("pairs", []))
+        pairs = "".join(f'''<div class="pair"><div class="pt"><div class="asis"><em>AS-IS</em><s>{e(q["asis"])}</s></div><div class="res"><em>RESULT</em><b>{e(q["result"])}</b></div><p class="why">{e(q["why"])}</p></div>{f'<a class="pimg" href="{e(prefix+q["img"])}" data-full="{e(prefix+q["img"])}"><img loading="lazy" src="{e(prefix)}thumbs/{e(q["img"])}.jpg" alt=""><span class="pop"><img loading="lazy" src="{e(prefix+q["img"])}" alt=""></span></a>' if q.get("img") else ""}</div>''' for q in stv.get("pairs", []))
         quote = f'<p class="squote">{e(stv["quote"])}</p>' if stv.get("quote") else ""
         stepsh = f'<h6>한 줄이 나오기까지</h6><ol class="steps">{steps}</ol>' if steps else ""
         more = f'<p class="smore">{e(stv["more"])}</p>' if stv.get("more") else ""
