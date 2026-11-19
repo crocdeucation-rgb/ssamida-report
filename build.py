@@ -52,13 +52,15 @@ def link(label, path, prefix):
     return f'<a class="file" href="{e(href)}" target="_blank" rel="noopener">{e(label)} <i>{ext}</i></a>'
 
 
+CSSV = str(int(os.path.getmtime(os.path.join(ROOT, "assets", "style.css"))))
+
 def page(title, body, prefix):
     return f"""<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>{e(title)}</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="{prefix}assets/style.css">
+<link rel="stylesheet" href="{prefix}assets/style.css?v={CSSV}">
 </head><body>{body}
 <footer class="ft">쌤이다 총괄보고 · 아이스캔 그룹 내부용 · 외부 공유 금지</footer>
 </body></html>"""
@@ -73,14 +75,23 @@ def done_html(t, prefix):
     sub = "".join(f"<li>{e(s)}</li>" for s in t.get("sub", []))
     sub = f'<ul class="sub">{sub}</ul>' if sub else ""
     note = f'<span class="note">{e(t["note"])}</span>' if t.get("note") else ""
+    stv = t.get("story")
     cards, btns = [], []
     for a, b in t.get("files", []):
         th = os.path.join(ROOT, "thumbs", b) + ".jpg"
         if not b.startswith("http") and os.path.exists(th):
-            cards.append(f'<a class="fcard" href="{e(prefix+b)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt=""><span>{e(a)} <i>→</i></span></a>')
+            cards.append(f'<a class="fcard{" feature" if stv and not cards else ""}" href="{e(prefix+b)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt=""><span>{e(a)} <i>→</i></span></a>')
         else:
             btns.append(link(a, b, prefix))
     files = (f'<div class="fcards">{"".join(cards)}</div>' if cards else "") + (f'<div class="files">{"".join(btns)}</div>' if btns else "")
+    stv = t.get("story")
+    if stv:
+        steps = "".join(f"<li>{e(x)}</li>" for x in stv.get("steps", []))
+        pairs = "".join(f'''<div class="pair"><div class="pt"><div class="asis"><em>AS-IS</em><s>{e(q["asis"])}</s></div><div class="res"><em>RESULT</em><b>{e(q["result"])}</b></div><p class="why">{e(q["why"])}</p></div>{f'<a class="pimg" href="{e(prefix+q["img"])}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(q["img"])}.jpg" alt=""></a>' if q.get("img") else ""}</div>''' for q in stv.get("pairs", []))
+        quote = f'<p class="squote">{e(stv["quote"])}</p>' if stv.get("quote") else ""
+        stepsh = f'<h6>한 줄이 나오기까지</h6><ol class="steps">{steps}</ol>' if steps else ""
+        more = f'<p class="smore">{e(stv["more"])}</p>' if stv.get("more") else ""
+        files = f'<div class="story">{quote}{stepsh}<div class="pairs">{pairs}</div>{more}</div>' + files
     imgs = t.get("images", [])
     if imgs:
         cells = "".join(f'<a href="{e(prefix+p)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(p)}.jpg" alt=""></a>' for p in imgs)

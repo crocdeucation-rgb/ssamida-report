@@ -117,3 +117,29 @@ main{padding-top:10px;padding-bottom:60px}
 .strip img{display:block;height:150px;width:auto;border-radius:8px;border:1px solid var(--line);background:#eef0ea}
 @media(max-width:560px){.fcards{grid-template-columns:1fr 1fr}.strip img{height:120px}}
 .cols>div,.cols2>div,.person{min-width:0}
+
+/* 제작 과정 · AS-IS → RESULT */
+.story{margin-top:12px;background:#fafbf7;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.story h6{font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.3px;margin:2px 0 8px}
+.story h6+.steps{margin-bottom:16px}
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:26px;font-size:13.5px;color:var(--sub);margin:6px 0;line-height:1.55}
+.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--lime);font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.pairs{display:grid;gap:8px}
+.pair{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.pt{flex:1;min-width:0}
+.asis,.res{display:flex;gap:8px;align-items:baseline}
+.asis em,.res em{font-style:normal;font-size:10px;font-weight:800;border-radius:4px;padding:0 5px;flex:none;letter-spacing:.3px}
+.asis em{background:#eef0ea;color:#8a9083}.res em{background:var(--lime);color:var(--ink)}
+.asis s{font-size:13px;color:#8a9083}
+.res{margin-top:4px}.res b{font-size:15px;font-weight:800;letter-spacing:-.3px;line-height:1.4}
+.why{font-size:12.5px;color:var(--mut);margin-top:4px}
+.pimg{flex:none}.pimg img{display:block;width:96px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+@media(max-width:560px){.pimg img{width:72px;height:72px}.res b{font-size:14px}}
+
+.squote{font-size:15px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+.smore{font-size:12.5px;color:var(--mut);margin-top:10px}
+.fcard.feature{grid-column:span 2}
+.fcard.feature img{aspect-ratio:16/8}
+.fcard.feature span{font-size:14px;padding:10px 12px}
+@media(max-width:560px){.fcard.feature{grid-column:1/-1}}
