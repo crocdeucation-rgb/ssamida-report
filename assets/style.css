@@ -104,3 +104,16 @@ main{padding-top:10px;padding-bottom:60px}
 .hd .pnav{z-index:5}
 @media(max-width:560px){.hd h1{font-size:26px}.person{padding:20px 16px}.ph{flex-direction:column}.in{padding:0 14px}}
 @media print{.hd{background:#fff;color:#000}.kpi{background:#fff;border-color:#ccc}.pnav,.back,.files{display:none}.person{break-inside:avoid-page}}
+
+/* 산출물 썸네일 */
+.fcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:10px}
+.fcard{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:border-color .15s}
+.fcard:hover{border-color:var(--ink)}
+.fcard img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;background:#eef0ea;border-bottom:1px solid var(--line)}
+.fcard span{display:block;font-size:12.5px;font-weight:700;padding:7px 10px;line-height:1.35}
+.fcard i{font-style:normal;color:var(--ok)}
+.strip{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;padding-bottom:6px;scroll-snap-type:x proximity}
+.strip a{flex:none;scroll-snap-align:start}
+.strip img{display:block;height:150px;width:auto;border-radius:8px;border:1px solid var(--line);background:#eef0ea}
+@media(max-width:560px){.fcards{grid-template-columns:1fr 1fr}.strip img{height:120px}}
+.cols>div,.cols2>div,.person{min-width:0}

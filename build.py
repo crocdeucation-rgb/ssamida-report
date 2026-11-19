@@ -73,8 +73,18 @@ def done_html(t, prefix):
     sub = "".join(f"<li>{e(s)}</li>" for s in t.get("sub", []))
     sub = f'<ul class="sub">{sub}</ul>' if sub else ""
     note = f'<span class="note">{e(t["note"])}</span>' if t.get("note") else ""
-    files = "".join(link(a, b, prefix) for a, b in t.get("files", []))
-    files = f'<div class="files">{files}</div>' if files else ""
+    cards, btns = [], []
+    for a, b in t.get("files", []):
+        th = os.path.join(ROOT, "thumbs", b) + ".jpg"
+        if not b.startswith("http") and os.path.exists(th):
+            cards.append(f'<a class="fcard" href="{e(prefix+b)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt=""><span>{e(a)} <i>→</i></span></a>')
+        else:
+            btns.append(link(a, b, prefix))
+    files = (f'<div class="fcards">{"".join(cards)}</div>' if cards else "") + (f'<div class="files">{"".join(btns)}</div>' if btns else "")
+    imgs = t.get("images", [])
+    if imgs:
+        cells = "".join(f'<a href="{e(prefix+p)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(p)}.jpg" alt=""></a>' for p in imgs)
+        files = f'<div class="strip">{cells}</div>' + files
     st = t.get("status", "완료")
     stc = "st-done" if st == "완료" else "st-prog"
     return f'<li class="it"><span class="st {stc}">{e(st)}</span><div class="tx"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{note}</div>{sub}{files}</div></li>'

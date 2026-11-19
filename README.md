@@ -11,3 +11,6 @@
 1. 신상준 · 김상현 · 신우성 → 일일업무보고(워드 양식 등) 제출
 2. Claude가 `data/날짜.json` 작성 → `python build.py` → push
 3. 전날 할 일 중 끝난 것은 그날 보고의 `closed`에 id를 넣으면 대시보드에서 빠짐. 안 넣으면 "N일째 이월"로 남음
+
+## 썸네일
+산출물을 넣은 뒤 `python make_thumbs.py` → `python build.py`. html은 첫 화면 캡처, png는 축소본이 thumbs/ 아래 생성되고 보고서에 썸네일로 보임. 항목에 "images": [png 경로들] 을 넣으면 가로 스크롤 이미지 줄로 표시.
