@@ -101,12 +101,18 @@ def done_html(t, prefix):
     stc = "st-done" if st == "완료" else "st-prog"
     return f'<li class="it{" hm" if media else ""}"><span class="st {stc}">{e(st)}</span><div class="tx"><div class="txm"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{note}</div>{sub}{files}</div>{media}</div></li>'
 
-def todo_html(t, show_who=False):
+def todo_html(t, show_who=False, prefix=""):
+    tf = ""
+    for a, b in t.get("files", []):
+        th = os.path.join(ROOT, "thumbs", b) + ".jpg"
+        img = f'<img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt="">' if os.path.exists(th) else ""
+        tf += f'<a class="tfile" href="{e(prefix+b)}" target="_blank" rel="noopener">{img}<span>{e(a)} →</span></a>'
+    tf = f'<div class="tfiles">{tf}</div>' if tf else ""
     note = f'<span class="note">{e(t["note"])}</span>' if t.get("note") else ""
     pri = '<span class="pri">우선</span>' if t.get("pri") == "high" else ""
     age = f'<span class="carry">{t["age"]}일째 이월</span>' if t.get("age", 0) > 0 else ""
     who = f'<span class="who">{e(t["who"])}</span>' if show_who else ""
-    return f'<li class="it todo"><span class="box"></span><div class="tx"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{pri}{due_badge(t)}{age}{who}</div>{note and "<div>"+note+"</div>"}</div></li>'
+    return f'<li class="it todo"><span class="box"></span><div class="tx"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{pri}{due_badge(t)}{age}{who}</div>{note and "<div>"+note+"</div>"}{tf}</div></li>'
 
 # ---------- 일자별 총괄 보고 ----------
 os.makedirs(os.path.join(ROOT, "reports"), exist_ok=True)
@@ -125,7 +131,7 @@ for day in days:
             continue
         iss = "".join(issue_html(i) for i in r.get("issues", []))
         dn = "".join(done_html(t, P) for t in r.get("done", []))
-        td = "".join(todo_html(dict(t, age=0)) for t in r.get("todo", []))
+        td = "".join(todo_html(dict(t, age=0), prefix=P) for t in r.get("todo", []))
         cards.append(f"""<section class="person" id="{r['id']}">{head}
 <h3 class="sec">이슈 <em>{len(r.get('issues',[]))}</em></h3><ul class="issues">{iss}</ul>
 <div class="cols"><div><h3 class="sec">오늘 한 일 <em>{len(r.get('done',[]))}</em></h3><ul class="list">{dn}</ul></div>
@@ -156,7 +162,7 @@ boards = []
 for r in rs:
     ts = [t for t in open_todos if t["wid"] == r["id"]]
     ts.sort(key=lambda t: (t.get("pri") != "high", t.get("due") or "9999"))
-    inner = "".join(todo_html(t) for t in ts) if ts else '<li class="empty">할 일 없음</li>'
+    inner = "".join(todo_html(t, prefix=P) for t in ts) if ts else '<li class="empty">할 일 없음</li>'
     if r.get("pending"): inner = '<li class="empty">보고 미제출</li>'
     boards.append(f'<div class="board"><div class="bh"><b>{e(r["name"])} <small>{e(r.get("title",""))}</small></b><em>{len(ts)}</em></div><ul class="list">{inner}</ul></div>')
 

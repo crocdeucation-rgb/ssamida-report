@@ -155,3 +155,8 @@ main{padding-top:10px;padding-bottom:60px}
 .asis em,.res em{display:inline-block;margin-right:6px;vertical-align:1px}
 .pair{align-items:flex-start}
 @media(min-width:1000px){.it.hm .pimg img{width:84px;height:84px}}
+
+.tfiles{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tfile{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:5px 10px 5px 5px;font-size:12.5px;font-weight:700;text-decoration:none}
+.tfile:hover{border-color:var(--ink)}
+.tfile img{width:64px;height:40px;object-fit:cover;object-position:top;border-radius:5px;border:1px solid var(--line)}
