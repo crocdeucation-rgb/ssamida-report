@@ -80,10 +80,11 @@ def done_html(t, prefix):
     for a, b in t.get("files", []):
         th = os.path.join(ROOT, "thumbs", b) + ".jpg"
         if not b.startswith("http") and os.path.exists(th):
-            cards.append(f'<a class="fcard{" feature" if stv and not cards else ""}" href="{e(prefix+b)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt=""><span>{e(a)} <i>→</i></span></a>')
+            cards.append(f'<a class="fcard" href="{e(prefix+b)}" target="_blank" rel="noopener"><img loading="lazy" src="{e(prefix)}thumbs/{e(b)}.jpg" alt=""><span>{e(a)} <i>→</i></span></a>')
         else:
             btns.append(link(a, b, prefix))
-    files = (f'<div class="fcards">{"".join(cards)}</div>' if cards else "") + (f'<div class="files">{"".join(btns)}</div>' if btns else "")
+    media = f'<div class="med"><div class="fcards">{"".join(cards)}</div></div>' if cards else ""
+    files = f'<div class="files">{"".join(btns)}</div>' if btns else ""
     stv = t.get("story")
     if stv:
         steps = "".join(f"<li>{e(x)}</li>" for x in stv.get("steps", []))
@@ -98,7 +99,7 @@ def done_html(t, prefix):
         files = f'<div class="strip">{cells}</div>' + files
     st = t.get("status", "완료")
     stc = "st-done" if st == "완료" else "st-prog"
-    return f'<li class="it"><span class="st {stc}">{e(st)}</span><div class="tx"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{note}</div>{sub}{files}</div></li>'
+    return f'<li class="it{" hm" if media else ""}"><span class="st {stc}">{e(st)}</span><div class="tx"><div class="txm"><div class="tt"><span class="area">{e(t["area"])}</span><b>{e(t["text"])}</b>{note}</div>{sub}{files}</div>{media}</div></li>'
 
 def todo_html(t, show_who=False):
     note = f'<span class="note">{e(t["note"])}</span>' if t.get("note") else ""

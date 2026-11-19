@@ -143,3 +143,15 @@ main{padding-top:10px;padding-bottom:60px}
 .fcard.feature img{aspect-ratio:16/8}
 .fcard.feature span{font-size:14px;padding:10px 12px}
 @media(max-width:560px){.fcard.feature{grid-column:1/-1}}
+
+/* PC: 글 왼쪽 · 산출물 오른쪽 */
+@media(min-width:1000px){
+ .it.hm .tx{display:grid;grid-template-columns:minmax(0,1fr) 210px;column-gap:18px;align-items:start}
+ .it.hm .med .fcards{grid-template-columns:1fr;margin-top:2px;gap:8px}
+ .it.hm .med .fcard img{aspect-ratio:16/10}
+ .it.hm .med .fcard span{font-size:12px;padding:6px 9px}
+}
+.asis,.res{display:block}
+.asis em,.res em{display:inline-block;margin-right:6px;vertical-align:1px}
+.pair{align-items:flex-start}
+@media(min-width:1000px){.it.hm .pimg img{width:84px;height:84px}}
